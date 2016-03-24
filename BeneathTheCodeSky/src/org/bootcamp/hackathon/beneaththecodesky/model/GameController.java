@@ -17,7 +17,7 @@ public /*not abstract */class GameController {
     private Field field;
     private Level currentLevel;
     private final int HEIGHT = 720;
-    private final int WIDTH = ;
+    //private final int WIDTH = !!!!!!!;
 
 
 

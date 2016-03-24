@@ -9,4 +9,9 @@ public class Level2 extends Level {
     public void init() {
 
     }
+
+    @Override
+    public void run() {
+
+    }
 }

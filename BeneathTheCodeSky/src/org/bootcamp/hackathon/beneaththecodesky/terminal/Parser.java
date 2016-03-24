@@ -17,7 +17,6 @@ public class Parser {
      * <p>
      * isolates Object and Method from a String
      */
-/*
     public static void main(String[] args) {
         Parser parser = new Parser();
         Map<Integer, Map<String, String>> parsingResult = parser.parse(" door.open\ntree.cut\n");
@@ -29,7 +28,7 @@ public class Parser {
         }
 
 
-    }*/
+    }
     public Map<Integer, Map<String, String>> parse(String inputText) {
         Scanner inputTextScanner = new Scanner(inputText);
         Map<Integer, Map<String, String>> result = new HashMap<Integer, Map<String, String>>();

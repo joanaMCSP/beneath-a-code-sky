@@ -17,10 +17,10 @@ public class LevelObjectFactory {
 
         switch (type){
             case FLOOR:
-                levelObject = new Floor();
+                levelObject = new Floor(LevelObjectType.FLOOR);
                 break;
             case PLATFORM:
-                levelObject = new Platform();
+                levelObject = new Platform(LevelObjectType.PLATFORM);
                 break;
 
         }
