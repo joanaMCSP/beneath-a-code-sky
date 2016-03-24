@@ -1,5 +1,8 @@
-package org.bootcamp.hackathon.beneaththecodesky.model.levels;
+package org.bootcamp.hackathon.beneaththecodesky.model.level_objects;
 
+import org.bootcamp.hackathon.beneaththecodesky.model.interactable_objects.Box;
+import org.bootcamp.hackathon.beneaththecodesky.model.interactable_objects.Door;
+import org.bootcamp.hackathon.beneaththecodesky.model.interactable_objects.Key;
 import org.bootcamp.hackathon.beneaththecodesky.model.level_objects.*;
 
 /**
@@ -16,14 +19,10 @@ public class LevelObjectFactory {
             case FLOOR:
                 levelObject = new Floor();
                 break;
-            case KEY:
-                levelObject = new Key();
+            case PLATFORM:
+                levelObject = new Platform();
                 break;
-            case DOOR:
-                levelObject = new Door();
-                break;
-            case BOX:
-                levelObject = new Box();
+
         }
 
         return levelObject;

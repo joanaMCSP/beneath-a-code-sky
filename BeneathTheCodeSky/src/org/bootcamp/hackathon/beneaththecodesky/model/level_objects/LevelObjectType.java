@@ -6,7 +6,5 @@ package org.bootcamp.hackathon.beneaththecodesky.model.level_objects;
 public enum LevelObjectType {
 
     FLOOR,
-    KEY,
-    DOOR,
-    BOX
+    PLATFORM
 }

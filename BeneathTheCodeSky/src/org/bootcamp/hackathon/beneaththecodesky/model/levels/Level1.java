@@ -1,6 +1,7 @@
 package org.bootcamp.hackathon.beneaththecodesky.model.levels;
 
 import org.bootcamp.hackathon.beneaththecodesky.model.Level;
+import org.bootcamp.hackathon.beneaththecodesky.model.level_objects.LevelObjectFactory;
 import org.bootcamp.hackathon.beneaththecodesky.model.level_objects.LevelObjectType;
 
 /**
