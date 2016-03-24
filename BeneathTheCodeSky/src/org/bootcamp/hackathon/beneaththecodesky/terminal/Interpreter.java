@@ -5,7 +5,7 @@ package org.bootcamp.hackathon.beneaththecodesky.terminal;
  */
 public class Interpreter {
 
-    public void interprete() {
+    public void interpret() {
 
     }
 }

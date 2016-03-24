@@ -1,6 +1,9 @@
 package org.bootcamp.hackathon.beneaththecodesky.model.levels;
 
 import org.bootcamp.hackathon.beneaththecodesky.model.interactable_objects.InteractableObject;
+import org.bootcamp.hackathon.beneaththecodesky.model.level_objects.LevelObject;
+import org.bootcamp.hackathon.beneaththecodesky.model.level_objects.LevelObjectFactory;
+import org.bootcamp.hackathon.beneaththecodesky.model.level_objects.LevelObjectType;
 import org.bootcamp.hackathon.beneaththecodesky.terminal.Global;
 
 import java.util.HashMap;
@@ -12,27 +15,29 @@ import java.util.Map;
  */
 public abstract class Level {
 
-    private List<Level> levelObjects;
+    private List<LevelObject> levelObjects;
     private Map<String, InteractableObject> interactableObjectMap;
-    private String[] interactableObjects;
     private boolean complete;
+
+
 
 
     public boolean isComplete() {
         return complete;
     }
 
-    public void setComplete(boolean complete) {
-        this.complete = complete;
+
+    public abstract void init();
+
+    public void levelComplete(){
+        complete = true;
     }
 
-    public abstract void validate();
+    public abstract void run();
 
-    public void initInteractableObjectMap() {
-
-        //interactableObjectMap = Global.getInterctableObjectMap();
+    public Map<String, InteractableObject> getInteractableObjectMap() {
+        return interactableObjectMap;
     }
-
 
 
 }
