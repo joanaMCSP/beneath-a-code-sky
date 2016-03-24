@@ -5,5 +5,7 @@ package org.bootcamp.hackathon.beneaththecodesky.model.level_objects;
  */
 public class Floor extends LevelObject {
 
+  public Floor(int x, int y){
 
+  }
 }

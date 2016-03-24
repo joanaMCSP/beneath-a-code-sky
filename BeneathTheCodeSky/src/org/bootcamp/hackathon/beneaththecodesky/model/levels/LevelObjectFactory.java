@@ -8,7 +8,7 @@ import org.bootcamp.hackathon.beneaththecodesky.model.level_objects.*;
 public class LevelObjectFactory {
 
 
-    public LevelObject createNewLevelObject(LevelObjectType type){
+    public static LevelObject createNewLevelObject(LevelObjectType type){
 
         LevelObject levelObject = null;
 
