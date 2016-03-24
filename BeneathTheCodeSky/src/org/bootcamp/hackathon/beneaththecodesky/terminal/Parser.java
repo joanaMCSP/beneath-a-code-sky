@@ -1,6 +1,8 @@
 package org.bootcamp.hackathon.beneaththecodesky.terminal;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -19,25 +21,43 @@ public class Parser {
 
     public static void main(String[] args) {
         Parser parser = new Parser();
-        String[] resultingParse;
-        resultingParse = parser.parseLine("    door.open  \n");
-        System.out.println("obj " + resultingParse[0]);
-        System.out.println("method " + resultingParse[1]);
+        Map<Integer, Map<String, String>> parsingResult = parser.parse(" door.open\ntree.cut\n");
+        for (Map<String, String> instruction : parsingResult.values()) {
+            for (String text : instruction.values()) {
+                System.out.print(text + " ");
+            }
+            System.out.println();
+        }
+
+
     }
 
 
-    public String[] parseLine(String input) {
-        String[] result = new String[2];
+    public Map<Integer, Map<String, String>> parse(String inputText) {
+        Scanner inputTextScanner = new Scanner(inputText);
+        Map<Integer, Map<String, String>> result = new HashMap<Integer, Map<String, String>>();
+        Integer countLine = 0;
+        while (inputTextScanner.hasNext()) {
+            result.put(countLine++, parseLine(inputTextScanner.nextLine()));
+        }
+        return result;
+        //TODO: checkar se é preciso fazer Scanner.close
+
+    }
+
+
+    private Map<String, String> parseLine(String line) {
+        Map<String, String> result = new HashMap<String, String>();
 
         //clean begin and end whitespaces
-        input = input.trim();
+        line = line.trim();
 
-        Scanner inputReader = new Scanner(input);
+        Scanner inputReader = new Scanner(line);
         //put '.' as token delimiter to this Scanner
         inputReader.useDelimiter("\\.");
 
-        result[0] = getObject(inputReader);
-        result[1] = getMethod(inputReader);
+        result.put("Object", getObject(inputReader));
+        result.put("Method", getMethod(inputReader));
 
         return result;
     }
