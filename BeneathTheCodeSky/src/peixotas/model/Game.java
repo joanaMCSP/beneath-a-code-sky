@@ -24,8 +24,7 @@ public /*not abstract */class Game {
 
     public Game(){
         levels = new LinkedList<>();
-
-        player = new Player();
+        player = new Player(50, 400);
         parser = new Parser();
         interpreter = new Interpreter();
     }
@@ -41,6 +40,10 @@ public /*not abstract */class Game {
     public void addLevel(Level level) {
 
         levels.add(level);
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     /**

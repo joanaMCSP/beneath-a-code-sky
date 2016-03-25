@@ -2,6 +2,7 @@ package peixotas.controller;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import peixotas.model.Player;
 import peixotas.model.interactable_objects.InteractableObject;
 import peixotas.model.levels.Level;
 import peixotas.model.levels.Level1;
@@ -13,8 +14,10 @@ import java.util.ArrayList;
  */
 public abstract class LevelController {
 
-    private Level level;
+    //private Level level;
     private Pane pane;
+    private Player player;
+    private ImageView playerView;
     private ArrayList<ImageView> views = new ArrayList<>();
 
 
@@ -41,5 +44,19 @@ public abstract class LevelController {
             views.add(view);
         }
 
+    }
+
+    public void loadPlayer(Player player) {
+        this.player = player;
+
+        float px = player.getX();
+        float py = player.getY();
+
+        playerView = new ImageView(player.getFileName());
+
+        playerView.setY(px);
+        playerView.setY(py);
+
+        pane.getChildren().add(playerView);
     }
 }
