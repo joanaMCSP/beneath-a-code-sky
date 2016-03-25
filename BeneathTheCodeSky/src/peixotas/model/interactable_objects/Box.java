@@ -7,11 +7,8 @@ import peixotas.view.representations.Interactable;
  */
 public class Box extends InteractableObject {
 
-    private Interactable representation;
-
     public Box(float x, float y) {
         super(x, y, "gameobjects/box.png");
-        this.representation = representation;
     }
 
     public void push() {
