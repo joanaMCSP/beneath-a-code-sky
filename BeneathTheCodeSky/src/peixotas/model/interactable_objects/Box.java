@@ -1,6 +1,5 @@
 package peixotas.model.interactable_objects;
 
-import peixotas.view.representations.Interactable;
 
 /**
  * Created by codecadet on 24/03/16.
