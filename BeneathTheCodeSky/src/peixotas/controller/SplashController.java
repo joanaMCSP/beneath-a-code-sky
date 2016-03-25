@@ -3,6 +3,7 @@ package peixotas.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import peixotas.Navigation;
 import peixotas.model.Game;
@@ -15,9 +16,10 @@ import java.util.ResourceBundle;
 /**
  * Created by Mike on 24/03/16.
  */
-public class SplashController implements Initializable {
+public class SplashController implements Initializable, Controller {
 
     private Game game;
+    private Scene scene;
 
     @FXML
     private Button start_button;
@@ -40,7 +42,6 @@ public class SplashController implements Initializable {
         level1Controller.loadLevel(level);
 
         // settar o player no controller do view1
-        System.out.println("ppppasd" + game.getPlayer());
         level1Controller.loadPlayer(game.getPlayer());
 
         //game.getPlayer();
@@ -55,5 +56,10 @@ public class SplashController implements Initializable {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    @Override
+    public void setScene(Scene scene) {
+        this.scene = scene;
     }
 }

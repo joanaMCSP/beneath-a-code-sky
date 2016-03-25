@@ -5,6 +5,14 @@ package peixotas.model;
  */
 public class Player {
 
+    public static final int COLUMNS = 8;
+    public static final int COUNT = 8;
+    public static final int OFFSET_X = 0;
+    public static final int OFFSET_Y = 0;
+    public static final int WIDTH = 100;
+    public static final int HEIGHT = 181;
+
+
     private float x;
     private float y;
     private String fileName;

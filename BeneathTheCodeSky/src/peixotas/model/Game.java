@@ -12,6 +12,9 @@ import java.util.LinkedList;
  */
 public /*not abstract */class Game {
 
+    // CONSTANTS
+
+
     //private Level[] levels;
     private LinkedList<Level> levels;
     private Player player;
