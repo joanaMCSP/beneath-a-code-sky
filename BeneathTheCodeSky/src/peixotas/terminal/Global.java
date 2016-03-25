@@ -1,6 +1,7 @@
 package peixotas.terminal;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +22,7 @@ public class Global {
         map.put("tester", "peixotas.Tester");
     }
 
-    public static HashMap<String, String> getInteractableObjectMap(String[] objects) {
+    public HashMap<String, String> getInteractableObjectMap(String[] objects) {
 
         HashMap<String, String> result = new HashMap<>();
 
@@ -31,6 +32,16 @@ public class Global {
             }
         }
         return result;
+    }
+
+    public void compare(List<String[]> list){
+        for (int i = 0; i < list.size(); i++) {
+
+            String key = list.get(i)[0];
+            if (map.containsKey(key)){
+                System.out.println("yay!");
+            }
+        }
     }
 
     public void quemFazEstaClasseAfinal() {
