@@ -17,9 +17,9 @@
                         <Image url="@/levelbackgrounds/level1.jpg" />
                     </image>
                 </ImageView>
-                <TextArea fx:id="console" opacity="0.85" prefHeight="200.0" prefWidth="1280.0" stylesheets="@textArea.css" text="write your code here...&#10;" visible="false">
+                <TextArea fx:id="console" opacity="0.85" prefHeight="0.0" prefWidth="1280.0" promptText="Write your code here..." stylesheets="@textArea.css" text="&#10;" visible="false">
                     <font>
-                        <Font name="Monospaced Regular" size="18.0" />
+                        <Font name="Monospaced Bold" size="18.0" />
                     </font>
                 </TextArea>
             <Button fx:id="submit_button" layoutX="1174.0" layoutY="162.0" mnemonicParsing="false" onAction="#onSubmitButtonClicked" prefHeight="30.0" prefWidth="83.0" text="Submit" visible="false">
