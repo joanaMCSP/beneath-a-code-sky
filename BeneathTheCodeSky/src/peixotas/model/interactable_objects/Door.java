@@ -1,5 +1,4 @@
 package peixotas.model.interactable_objects;
-import peixotas.view.representations.Interactable;
 
 /**
  * Created by codecadet on 24/03/16.
@@ -14,7 +13,8 @@ public class Door extends InteractableObject {
 
     public void open() {
 
-        System.out.println("this door is very open. very wide.");
+
+        System.out.println("this door is very open, very wide.");
         open = true;
     }
 

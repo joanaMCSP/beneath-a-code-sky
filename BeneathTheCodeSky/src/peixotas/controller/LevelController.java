@@ -20,7 +20,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
 import peixotas.model.Player;
+import peixotas.model.interactable_objects.Box;
+import peixotas.model.interactable_objects.Door;
 import peixotas.model.interactable_objects.InteractableObject;
+import peixotas.model.interactable_objects.Key;
 import peixotas.model.levels.Level;
 import peixotas.view.SpriteAnimation;
 
@@ -29,6 +32,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by Mike on 25/03/16.
@@ -55,6 +59,8 @@ public abstract class LevelController implements Controller {
     //private Animation animation;
     private AudioClip plonkSound;
 
+    private HashMap<InteractableObject, ImageView> interactableObjects;
+
     final DoubleProperty velocity = new SimpleDoubleProperty();
     final LongProperty lastUpdateTime = new SimpleLongProperty();
     private ArrayList<ImageView> views = new ArrayList<>();
@@ -78,6 +84,8 @@ public abstract class LevelController implements Controller {
 
     public void loadLevel() {
 
+        interactableObjects = new HashMap<>();
+
         Collection<InteractableObject> gameObjects = level.getInteractableObjects();
 
         for (InteractableObject obj : gameObjects) {
@@ -85,6 +93,11 @@ public abstract class LevelController implements Controller {
             float y = obj.getY();
 
             ImageView view = new ImageView(obj.getFileName());
+            System.out.println(view);
+            view.setId(obj.getFileName());
+            System.out.println(view.getId());
+            interactableObjects.put(obj, view);
+            System.out.println(interactableObjects);
             view.setX(x);
             view.setY(y);
 
@@ -171,10 +184,20 @@ public abstract class LevelController implements Controller {
 
     }
 
+    //private String s;
+
     @FXML
     void onSubmitButtonClicked(ActionEvent event) {
         try {
             level.execute(console.getText());
+
+            //s = console.getText();
+
+            moveInteractableObject(level.getInteractableObjects());
+
+            //moveInteractableObject();
+
+            console.clear();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -192,6 +215,26 @@ public abstract class LevelController implements Controller {
     @Override
     public void setScene(Scene scene) {
         this.scene = scene;
+    }
+
+    private void moveInteractableObject(Collection<InteractableObject> collection) {
+        for (InteractableObject object : collection) {
+            if (object instanceof Box && interactableObjects.containsKey(object)) {
+                //System.out.println("I'm a box");
+                interactableObjects.get(object).setX(object.getX() + 100);
+                break;
+            }
+
+            if (object instanceof Key && interactableObjects.containsKey(object)) {
+                interactableObjects.get(object).setY(550);
+                break;
+            }
+
+            if (object instanceof Door && interactableObjects.containsKey(object)) {
+                interactableObjects.get(object.getFileName());
+            }
+        }
+
     }
 
 

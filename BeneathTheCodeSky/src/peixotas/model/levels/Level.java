@@ -46,7 +46,9 @@ public abstract class Level {
     }
 
     public Collection<InteractableObject> getInteractableObjects() {
+        //System.out.println(interactableObjects.values());
         return interactableObjects.values();
+
 
     }
 
