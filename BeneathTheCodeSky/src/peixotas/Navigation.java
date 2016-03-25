@@ -9,6 +9,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import peixotas.controller.Controller;
+import peixotas.controller.LevelController;
 
 import java.io.File;
 import java.io.IOException;
@@ -77,11 +79,14 @@ public class Navigation {
             Parent root = fxmlLoader.load();
 
             Pane mainPane = new Pane();
+            Initializable controller = fxmlLoader.getController();
 
-            controllers.put(view, fxmlLoader.getController());
+            controllers.put(view, controller);
+
             System.out.println("adding controller" + controllers.get(view));
 
             Scene scene = new Scene(root, MIN_WIDTH, MIN_HEIGHT);
+            ((Controller)controller).setScene(scene);
             scenes.push(scene);
 
             setScene(scene);
@@ -89,6 +94,8 @@ public class Navigation {
         } catch (IOException ioe) {
             System.out.println("Failure to load view " + view + ": " + ioe.getMessage());
         }
+
+
 
     }
 

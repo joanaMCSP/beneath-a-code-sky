@@ -3,6 +3,7 @@ package peixotas.controller;
 import javafx.animation.Animation;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,12 +22,13 @@ import java.util.ArrayList;
 /**
  * Created by Mike on 25/03/16.
  */
-public abstract class LevelController {
+public abstract class LevelController implements Controller {
 
     //private Level level;
     private Pane pane;
     private Player player;
     private ImageView playerView;
+    private Scene scene;
     //private Rectangle2D rectangle2D;
     //private Animation animation;
     private ArrayList<ImageView> views = new ArrayList<>();
@@ -36,6 +38,15 @@ public abstract class LevelController {
     }
 
     public void loadLevel(Level level) {
+
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                System.out.println("key pressed: " + event.getText());
+                double dx = playerView.getX() + 100;
+                playerView.setX(dx);
+            }
+        });
 
         ArrayList<InteractableObject> gameObjects = level.getGameObjects();
 
@@ -87,6 +98,13 @@ public abstract class LevelController {
         System.out.println(playerView.getX());
         //playerView.translateXProperty();
     }
+
+    @Override
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
+
 
     /*private void installEventHandler(final Node keyboardNode) {
         final EventHandler<KeyEvent> key = new EventHandler<KeyEvent>() {
