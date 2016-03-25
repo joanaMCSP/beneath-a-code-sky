@@ -12,7 +12,7 @@ public class Player {
     public Player(float x, float y) {
         this.x = x;
         this.y = y;
-        fileName = "gameobjects/playerSprite.png";
+        fileName = "gameobjects/player.png";
 
     }
 

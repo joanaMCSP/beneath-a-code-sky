@@ -1,9 +1,13 @@
 package peixotas;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -71,6 +75,8 @@ public class Navigation {
             fxmlLoader = new FXMLLoader(getClass().getResource(s));
 
             Parent root = fxmlLoader.load();
+
+            Pane mainPane = new Pane();
 
             controllers.put(view, fxmlLoader.getController());
             System.out.println("adding controller" + controllers.get(view));

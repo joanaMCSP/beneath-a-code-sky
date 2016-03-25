@@ -12,6 +12,14 @@ import java.util.LinkedList;
  */
 public /*not abstract */class Game {
 
+    // CONSTANTS
+    public static final int COLUMNS  =   8;
+    public static final int COUNT    =  8;
+    public static final int OFFSET_X = 0;
+    public static final int OFFSET_Y = 0;
+    public static final int WIDTH    = 800;
+    public static final int HEIGHT   = 181;
+
     //private Level[] levels;
     private LinkedList<Level> levels;
     private Player player;
