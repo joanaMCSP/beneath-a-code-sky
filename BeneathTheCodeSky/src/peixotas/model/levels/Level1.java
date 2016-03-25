@@ -1,29 +1,24 @@
 package peixotas.model.levels;
 
 import peixotas.controller.Level1Controller;
+import peixotas.controller.LevelController;
 import peixotas.model.interactable_objects.Door;
 import peixotas.model.interactable_objects.InteractableObject;
-import peixotas.terminal.Global;
-import peixotas.view.representations.Interactable;
-import sun.reflect.Reflection;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by codecadet on 24/03/16.
  */
-public class Level1 extends Level {
+//public class Level1 extends Levelii {
+public class Level1 implements Level {
 
-    private Level1Controller controller;
+    private LevelController controller;
     private ArrayList<InteractableObject> gameObjects;
-    //private Door door;
 
     public Level1 (){
         gameObjects = new ArrayList<>();
     }
-
-
 
     public void init(){
 
@@ -35,40 +30,26 @@ public class Level1 extends Level {
         //HashMap<String, String> temp = Global.getInteractableObjectMap(levelObjects);
         //TODO: Antoninho Reflection!!!!!!!!
 
-        // new door at x:1m, y:0m
-        //door = new Door(1, 0);
-
-
     }
 
     public ArrayList<InteractableObject> getGameObjects() {
         return gameObjects;
     }
 
-    /*public Door getDoor() {
-        return door;
-    }*/
-
-    public void run(){
-        init();
-    }
-
     @Override
-    public void setController(Level1Controller controller) {
-        this.controller = controller;
+    public void setController(LevelController levelController) {
+        this.controller = levelController;
     }
 
     public void createObjects() {
         Door door = new Door(700,400);
         System.out.println("anto print: " + door.getX());
 
-
         gameObjects.add(door);
     }
 
-    /*public Door createDoor() {
-        door = new Door(700, 300);
+    public void run(){
+        init();
+    }
 
-        return door;
-    }*/
 }

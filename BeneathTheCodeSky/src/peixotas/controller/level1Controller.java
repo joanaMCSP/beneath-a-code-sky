@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import peixotas.model.interactable_objects.Door;
 import peixotas.model.interactable_objects.InteractableObject;
+import peixotas.model.levels.Level;
 import peixotas.model.levels.Level1;
 
 import java.net.URL;
@@ -17,14 +18,12 @@ import java.util.ResourceBundle;
 /**
  * Created by Mike on 24/03/16.
  */
-public class Level1Controller implements Initializable {
+public class Level1Controller extends LevelController implements Initializable {
 
-    private Level1 level;
-    private ArrayList<ImageView> views = new ArrayList<>();
     //private Door door;
 
     @FXML
-    private Pane level_pane;
+    private Pane pane;
 
     @FXML
     private ImageView bgImage;
@@ -42,30 +41,8 @@ public class Level1Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        setPane(pane);
     }
 
-    public void setLevel(Level1 level) {
-        this.level = level;
-
-        ArrayList<InteractableObject> gameObjects = level.getGameObjects();
-
-        for (InteractableObject obj : gameObjects) {
-            System.out.println(obj);
-            float x = obj.getX();
-            float y = obj.getY();
-
-            System.out.println(x + ","+ y);
-
-            ImageView view = new ImageView(obj.getFileName());
-            view.setX(x);
-            view.setY(y);
-
-            level_pane.getChildren().add(view);
-            views.add(view);
-        }
-
-
-    }
 
 }

@@ -1,8 +1,7 @@
 package peixotas.model;
 
 import peixotas.model.levels.Level;
-import peixotas.model.levels.Level1;
-import peixotas.model.levels.Level2;
+import peixotas.model.levels.Levelii;
 import peixotas.terminal.Interpreter;
 import peixotas.terminal.Parser;
 
@@ -24,10 +23,8 @@ public /*not abstract */class Game {
     //private Level currentLevel;
 
     public Game(){
-        //levels = new Level[]{new Level1(), new Level2()};
         levels = new LinkedList<>();
 
-        //levels[0].setController();
         player = new Player();
         parser = new Parser();
         interpreter = new Interpreter();
@@ -38,7 +35,7 @@ public /*not abstract */class Game {
     }
 
     /*public void nextLevel(){
-        Level level = new Level1();
+        Levelii level = new Level1();
     }*/
 
     public void addLevel(Level level) {

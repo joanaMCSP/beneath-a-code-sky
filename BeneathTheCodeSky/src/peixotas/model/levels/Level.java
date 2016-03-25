@@ -1,48 +1,23 @@
 package peixotas.model.levels;
 
-import peixotas.controller.Level1Controller;
 import peixotas.controller.LevelController;
 import peixotas.model.interactable_objects.InteractableObject;
-import peixotas.model.level_objects.LevelObject;
-import sun.reflect.Reflection;
 
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
- * Created by codecadet on 24/03/16.
+ * Created by Mike on 25/03/16.
  */
-public abstract class Level {
+public interface Level {
 
-    // plataforma e chão list
-    //private List<LevelObject> levelObjects;
+    ArrayList<InteractableObject> getGameObjects();
 
-    private Map<String, InteractableObject> interactableObjectMap;
-    private boolean complete;
-    private LevelController levelController;
+    void init();
 
-    //Reflection
+    void setController(LevelController levelController);
 
-    public void setController(Level1Controller controller) {
-        this.levelController = levelController;
-    }
+    void createObjects();
 
-    public boolean isComplete() {
-        return complete;
-    }
-
-
-    public abstract void init();
-
-    public void levelComplete(){
-        complete = true;
-    }
-
-    public abstract void run();
-
-    public Map<String, InteractableObject> getInteractableObjectMap() {
-        return interactableObjectMap;
-    }
-
+    void run();
 
 }
