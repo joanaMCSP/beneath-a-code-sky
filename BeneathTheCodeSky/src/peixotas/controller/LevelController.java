@@ -14,12 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
-import peixotas.Sound;
 import peixotas.model.Player;
 import peixotas.model.interactable_objects.InteractableObject;
 import peixotas.model.levels.Level;
@@ -27,7 +25,6 @@ import peixotas.view.SpriteAnimation;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
