@@ -6,10 +6,12 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -37,6 +39,9 @@ public abstract class LevelController implements Controller {
 
     @FXML
     private TextArea console;
+
+    @FXML
+    private Button submit_button;
 
     //private Level level;
     private Animation playerAnim;
@@ -97,9 +102,12 @@ public abstract class LevelController implements Controller {
                         break;
                     case ENTER:
                         console.setVisible(true);
+                        console.setStyle("-fx-text-fill: green");
+                        submit_button.setVisible(true);
                         break;
                     case ESCAPE:
                         console.setVisible(false);
+                        submit_button.setVisible(false);
                         break;
                 }
 
@@ -139,6 +147,12 @@ public abstract class LevelController implements Controller {
         playerAnim.setCycleCount(Animation.INDEFINITE);
 
 
+    }
+
+    @FXML
+    void onSubmitButtonClicked(ActionEvent event) {
+        console.getText();
+        System.out.println(console.getText());
     }
 
     public void movePlayer(int x) {

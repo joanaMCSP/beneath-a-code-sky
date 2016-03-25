@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="672.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="peixotas.controller.Level1Controller">
-   <children>
-      <Pane fx:id="pane" prefHeight="672.0" prefWidth="1280.0">
-         <children>
-            <ImageView id="bg" fx:id="bgImage" fitHeight="721.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/levelbackgrounds/level1.jpg" />
-               </image>
-            </ImageView>
-            <TextArea fx:id="console" opacity="0.25" prefHeight="200.0" prefWidth="1280.0" visible="false" />
-         </children>
-      </Pane>
-   </children>
+    <children>
+        <Pane fx:id="pane" prefHeight="672.0" prefWidth="1280.0">
+            <children>
+                <ImageView id="bg" fx:id="bgImage" fitHeight="721.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@/levelbackgrounds/level1.jpg" />
+                    </image>
+                </ImageView>
+                <TextArea fx:id="console" opacity="0.7" prefHeight="200.0" prefWidth="1280.0" style="-fx-background-color: #000;" text="write your code here...&#10;" visible="false">
+                    <font>
+                        <Font name="Monospaced Regular" size="18.0" />
+                    </font>
+                </TextArea>
+            <Button fx:id="submit_button" layoutX="1174.0" layoutY="162.0" mnemonicParsing="false" onAction="#onSubmitButtonClicked" prefHeight="30.0" prefWidth="83.0" text="Submit" visible="false">
+               <font>
+                  <Font name="Optimus" size="14.0" />
+               </font>
+            </Button>
+            </children>
+        </Pane>
+    </children>
 </VBox>
