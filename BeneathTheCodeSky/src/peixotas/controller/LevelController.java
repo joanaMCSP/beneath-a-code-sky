@@ -1,5 +1,6 @@
 package peixotas.controller;
 
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.LongProperty;
@@ -11,9 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import peixotas.model.Player;
 import peixotas.model.interactable_objects.InteractableObject;
 import peixotas.model.levels.Level;
+import peixotas.view.SpriteAnimation;
 
 import java.util.ArrayList;
 
@@ -60,13 +63,15 @@ public abstract class LevelController implements Controller {
                 switch (event.getCode()) {
                     case RIGHT:
                         velocity.set(100);
-                        playerView.setScaleX(-1);
+                        playerView.setScaleX(1);
                         break;
                     case LEFT:
                         velocity.set(-100);
-                        playerView.setScaleX(1);
+                        playerView.setScaleX(-1);
                         break;
                 }
+
+                animation.start();
             }
         });
 
@@ -121,6 +126,18 @@ public abstract class LevelController implements Controller {
         pane.getChildren().add(playerView);
 
         //installEventHandler(playerView);
+
+        final Animation animation = new SpriteAnimation(
+                playerView,
+                Duration.millis(1000),
+                player.COUNT, player.COLUMNS,
+                player.OFFSET_X, player.OFFSET_Y,
+                player.WIDTH, player.HEIGHT
+        );
+        animation.setCycleCount(Animation.INDEFINITE);
+        animation.play();
+
+
     }
 
     public void movePlayer(int x) {
