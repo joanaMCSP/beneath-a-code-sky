@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import peixotas.Navigation;
+import peixotas.model.Game;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,7 +13,9 @@ import java.util.ResourceBundle;
 /**
  * Created by Mike on 24/03/16.
  */
-public class splashController implements Initializable {
+public class SplashController implements Initializable {
+
+    private Game game;
 
     @FXML
     private Button start_button;
@@ -27,4 +30,7 @@ public class splashController implements Initializable {
 
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }
