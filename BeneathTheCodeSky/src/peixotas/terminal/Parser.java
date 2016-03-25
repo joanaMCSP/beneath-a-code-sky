@@ -1,8 +1,6 @@
 package peixotas.terminal;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -19,32 +17,46 @@ public class Parser {
      */
     public static void main(String[] args) {
         Parser parser = new Parser();
-        Map<Integer, Map<String, String>> parsingResult = parser.parse(" door.open\ntree.cut\n");
-        for (Map<String, String> instruction : parsingResult.values()) {
-            for (String text : instruction.values()) {
-                System.out.print(text + " ");
-            }
-            System.out.println();
+        List<String[]> parsingResult = parser.parse("     tester.print1  \n print.this \n and.this \ntester.print2");
+//        //Map<Integer, Map<String, String>> parsingResult = parser.parse("     tester.print1  \n print.this \n and.this \ntester.print2");
+//        for (Map<String, String> instruction : parsingResult.values()) {
+//            for (String text : instruction.values()) {
+//                System.out.print(text + " ");
+//            }
+//            System.out.println();
+//        }
+
+        for (int i = 0; i < parsingResult.size(); i++) {
+            System.out.print(parsingResult.get(i)[0] + " ");
+            System.out.println(parsingResult.get(i)[1]);
         }
+
 
 
     }
 
-    public Map<Integer, Map<String, String>> parse(String inputText) {
+    public List<String[]> parse(String inputText) {
         Scanner inputTextScanner = new Scanner(inputText);
-        Map<Integer, Map<String, String>> result = new HashMap<Integer, Map<String, String>>();
-        Integer countLine = 0;
+
+
+        List<String[]> result = new ArrayList<>();
+
+        //Map<Integer, Map<String, String>> result = new HashMap<Integer, Map<String, String>>();
+        //Integer countLine = 0;
         while (inputTextScanner.hasNext()) {
-            result.put(countLine++, parseLine(inputTextScanner.nextLine()));
+            result.add(parseLine(inputTextScanner.nextLine()));
+            //result.put(countLine++, parseLine(inputTextScanner.nextLine()));
         }
+        System.out.println(result.size());
         return result;
         //TODO: checkar se é preciso fazer Scanner.close
 
     }
 
 
-    private Map<String, String> parseLine(String line) {
-        Map<String, String> result = new HashMap<String, String>();
+    public String[] parseLine(String line) {
+       // Map<String, String> result = new HashMap<String, String>();
+        String[] result = new String[2];
 
         //clean begin and end whitespaces
         line = line.trim();
@@ -53,8 +65,12 @@ public class Parser {
         //put '.' as token delimiter to this Scanner
         inputReader.useDelimiter("\\.");
 
-        result.put("Object", getObject(inputReader));
-        result.put("Method", getMethod(inputReader));
+//        result.put("Object", getObject(inputReader));
+//        result.put("Method", getMethod(inputReader));
+
+        result[0] = getObject(inputReader);
+        result[1] = getObject(inputReader);
+        //System.out.println(result.size());
 
         return result;
     }

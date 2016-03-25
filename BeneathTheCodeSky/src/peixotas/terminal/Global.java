@@ -13,11 +13,12 @@ public class Global {
     private static Map<String, String> map;
 
     public Global() {
-        String path = "org.bootcamp.hackathon.beneaththecodesky.model.interactable_objects.";
+        String path = "peixotas.model.interactable_objects.";
         map = new HashMap<>();
         map.put("box", path + "Box");
         map.put("door", path + "Door");
         map.put("key", path + "Key");
+        map.put("tester", "peixotas.Tester");
     }
 
     public static HashMap<String, String> getInteractableObjectMap(String[] objects) {
