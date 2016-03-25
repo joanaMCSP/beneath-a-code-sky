@@ -1,5 +1,6 @@
 package peixotas.controller;
 
+import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.DoubleProperty;
@@ -13,12 +14,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
+import peixotas.Sound;
 import peixotas.model.Player;
 import peixotas.model.interactable_objects.InteractableObject;
 import peixotas.model.levels.Level;
 import peixotas.view.SpriteAnimation;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -34,6 +40,7 @@ public abstract class LevelController implements Controller {
     private Scene scene;
     //private Rectangle2D rectangle2D;
     //private Animation animation;
+    private AudioClip plonkSound;
 
     final DoubleProperty velocity = new SimpleDoubleProperty();
     final LongProperty lastUpdateTime = new SimpleLongProperty();
@@ -56,6 +63,9 @@ public abstract class LevelController implements Controller {
         this.pane = pane;
     }
 
+
+
+
     public void loadLevel(Level level) {
 
         Collection<InteractableObject> gameObjects = level.getInteractableObjects();
@@ -72,6 +82,7 @@ public abstract class LevelController implements Controller {
             views.add(view);
         }
 
+
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -80,15 +91,19 @@ public abstract class LevelController implements Controller {
                     case RIGHT:
                         velocity.set(100);
                         playerView.setScaleX(1);
+                        animation.start();
+                        playerAnim.play();
+                        playSound();
                         break;
                     case LEFT:
                         velocity.set(-100);
                         playerView.setScaleX(-1);
+                        animation.start();
+                        playerAnim.play();
+                        playSound();
                         break;
                 }
 
-                animation.start();
-                playerAnim.play();
             }
         });
 
@@ -99,8 +114,9 @@ public abstract class LevelController implements Controller {
                 playerAnim.stop();
             }
         });
-
         animation.start();
+
+
 
     }
 
@@ -108,10 +124,21 @@ public abstract class LevelController implements Controller {
         float px = player.getX();
         float py = player.getY();
 
+        String audioFile;
+
+        try {
+            audioFile = new File("assets/walk.m4a").toURI().toURL().toString();
+            plonkSound = new AudioClip(audioFile);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
         playerView = new ImageView(player.getFileName());
         playerView.setViewport(new Rectangle2D(player.OFFSET_X, player.OFFSET_Y, player.WIDTH, player.HEIGHT));
         playerView.setY(px);
         playerView.setY(py);
+
 
         pane.getChildren().add(playerView);
 
@@ -152,5 +179,13 @@ public abstract class LevelController implements Controller {
             }
         };
     }*/
+
+    private void playSound() {
+        if (plonkSound.isPlaying()) {
+            return;
+        }
+
+        plonkSound.play();
+    }
 
 }
