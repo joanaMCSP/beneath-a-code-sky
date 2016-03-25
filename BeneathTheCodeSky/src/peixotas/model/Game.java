@@ -1,7 +1,6 @@
 package peixotas.model;
 
 import peixotas.model.levels.Level;
-import peixotas.model.levels.Levelii;
 import peixotas.terminal.Interpreter;
 import peixotas.terminal.Parser;
 

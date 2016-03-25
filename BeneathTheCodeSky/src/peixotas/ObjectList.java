@@ -3,6 +3,7 @@ package peixotas;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Paulo Pereira on 24/03/16.
@@ -39,7 +40,7 @@ public class ObjectList {
     }
 
 
-    public HashMap<String, String> getInteractableObjectMap(String[] objects) {
+    public HashMap<String, String> getInteractableObjectMap(Set<String> objects) {
 
         HashMap<String, String> result = new HashMap<>();
 
