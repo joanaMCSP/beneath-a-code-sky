@@ -5,9 +5,9 @@ import javafx.scene.layout.Pane;
 import peixotas.model.Player;
 import peixotas.model.interactable_objects.InteractableObject;
 import peixotas.model.levels.Level;
-import peixotas.model.levels.Level1;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Mike on 25/03/16.
@@ -27,7 +27,7 @@ public abstract class LevelController {
 
     public void loadLevel(Level level) {
 
-        ArrayList<InteractableObject> gameObjects = level.getGameObjects();
+        Collection<InteractableObject> gameObjects = level.getInteractableObjects();
 
         for (InteractableObject obj : gameObjects) {
             System.out.println(obj);

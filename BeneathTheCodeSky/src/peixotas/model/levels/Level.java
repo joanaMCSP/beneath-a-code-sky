@@ -3,14 +3,14 @@ package peixotas.model.levels;
 import peixotas.controller.LevelController;
 import peixotas.model.interactable_objects.InteractableObject;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Mike on 25/03/16.
  */
 public interface Level {
 
-    ArrayList<InteractableObject> getGameObjects();
+    Collection<InteractableObject> getInteractableObjects();
 
     void init();
 

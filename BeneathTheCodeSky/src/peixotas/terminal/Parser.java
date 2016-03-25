@@ -15,37 +15,17 @@ public class Parser {
      * <p>
      * isolates Object and Method from a String
      */
-    public static void main(String[] args) {
-        Parser parser = new Parser();
-        List<String[]> parsingResult = parser.parse("     tester.print1  \n print.this \n and.this \ntester.print2");
-//        //Map<Integer, Map<String, String>> parsingResult = parser.parse("     tester.print1  \n print.this \n and.this \ntester.print2");
-//        for (Map<String, String> instruction : parsingResult.values()) {
-//            for (String text : instruction.values()) {
-//                System.out.print(text + " ");
-//            }
-//            System.out.println();
-//        }
 
-        for (int i = 0; i < parsingResult.size(); i++) {
-            System.out.print(parsingResult.get(i)[0] + " ");
-            System.out.println(parsingResult.get(i)[1]);
-        }
-
-
-
-    }
-
-    public List<String[]> parse(String inputText) {
+    public static List<String[]> parse(String inputText) {
         Scanner inputTextScanner = new Scanner(inputText);
 
 
         List<String[]> result = new ArrayList<>();
 
-        //Map<Integer, Map<String, String>> result = new HashMap<Integer, Map<String, String>>();
-        //Integer countLine = 0;
+
         while (inputTextScanner.hasNext()) {
             result.add(parseLine(inputTextScanner.nextLine()));
-            //result.put(countLine++, parseLine(inputTextScanner.nextLine()));
+
         }
         System.out.println(result.size());
         return result;
@@ -54,7 +34,7 @@ public class Parser {
     }
 
 
-    public String[] parseLine(String line) {
+    private static String[] parseLine(String line) {
        // Map<String, String> result = new HashMap<String, String>();
         String[] result = new String[2];
 
@@ -69,14 +49,14 @@ public class Parser {
 //        result.put("Method", getMethod(inputReader));
 
         result[0] = getObject(inputReader);
-        result[1] = getObject(inputReader);
+        result[1] = getMethod(inputReader);
         //System.out.println(result.size());
 
         return result;
     }
 
 
-    private String getObject(Scanner inputReader) {
+    private static String getObject(Scanner inputReader) {
         String result = null;
 
         Pattern pattern = Pattern.compile("\\w*");
@@ -89,7 +69,7 @@ public class Parser {
     }
 
 
-    private String getMethod(Scanner inputReader) {
+    private static String getMethod(Scanner inputReader) {
         String method = inputReader.next("\\w*");
         //execute method
         return method;
