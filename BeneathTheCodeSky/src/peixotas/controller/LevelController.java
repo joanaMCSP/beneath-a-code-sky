@@ -108,11 +108,13 @@ public abstract class LevelController implements Controller {
                         playSound();
                         break;
                     case ENTER:
+                        console.setPrefHeight(200);
                         console.setVisible(true);
                         console.setStyle("-fx-background-color: black; -fx-text-fill: green");
                         submit_button.setVisible(true);
                         break;
                     case ESCAPE:
+                        console.setPrefHeight(0);
                         console.setVisible(false);
                         submit_button.setVisible(false);
                         break;

@@ -26,7 +26,7 @@ public class Navigation {
     private static Navigation instance = null;
 
     private final int MIN_WIDTH = 1280;
-    private final int MIN_HEIGHT = 720;
+    private final int MIN_HEIGHT = 672;
     private final String VIEW_PATH = "view/";
 
     private LinkedList<Scene> scenes = new LinkedList<Scene>();
