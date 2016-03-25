@@ -6,7 +6,6 @@ import peixotas.view.representations.Interactable;
  */
 public class Door extends InteractableObject {
 
-    private Interactable representation;
     private boolean open;
 
     public Door(float x, float y) {
@@ -15,8 +14,8 @@ public class Door extends InteractableObject {
 
     public void open() {
 
-        System.out.println("the door is open. wide.");
-        //open = true; THIS IS THE REAL COMMAND!!!!!
+        System.out.println("this door is very open. very wide.");
+        open = true;
     }
 
     public boolean isOpen() {

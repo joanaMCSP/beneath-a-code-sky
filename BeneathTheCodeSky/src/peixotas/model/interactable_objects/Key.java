@@ -19,6 +19,8 @@ public class Key extends InteractableObject {
 
     public void drop() {
 
+        System.out.println("this key is being much droped. So wow.");
+
     }
 
 

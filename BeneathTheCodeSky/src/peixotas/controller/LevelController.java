@@ -1,15 +1,18 @@
 package peixotas.controller;
 
-import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -33,8 +36,19 @@ import java.util.Collection;
  */
 public abstract class LevelController implements Controller {
 
-    //private Level level;
+    @FXML
     private Pane pane;
+
+    @FXML
+    private ImageView bgImage;
+
+    @FXML
+    private TextArea console;
+
+    @FXML
+    private Button submit_button;
+
+    //private Level level;
     private Animation playerAnim;
     private ImageView playerView;
     private Scene scene;
@@ -58,13 +72,6 @@ public abstract class LevelController implements Controller {
             lastUpdateTime.set(timestamp);
         }
     };
-
-    public void setPane(Pane pane) {
-        this.pane = pane;
-    }
-
-
-
 
     public void loadLevel(Level level) {
 
@@ -102,6 +109,15 @@ public abstract class LevelController implements Controller {
                         playerAnim.play();
                         playSound();
                         break;
+                    case ENTER:
+                        console.setVisible(true);
+                        console.setStyle("-fx-text-fill: green");
+                        submit_button.setVisible(true);
+                        break;
+                    case ESCAPE:
+                        console.setVisible(false);
+                        submit_button.setVisible(false);
+                        break;
                 }
 
             }
@@ -115,8 +131,6 @@ public abstract class LevelController implements Controller {
             }
         });
         animation.start();
-
-
 
     }
 
@@ -152,6 +166,12 @@ public abstract class LevelController implements Controller {
         playerAnim.setCycleCount(Animation.INDEFINITE);
 
 
+    }
+
+    @FXML
+    void onSubmitButtonClicked(ActionEvent event) {
+        console.getText();
+        System.out.println(console.getText());
     }
 
     public void movePlayer(int x) {

@@ -22,15 +22,6 @@ public class Level1Controller extends LevelController implements Initializable {
 
     //private Door door;
 
-    @FXML
-    private Pane pane;
-
-    @FXML
-    private ImageView bgImage;
-
-    @FXML
-    private TextArea console;
-
     private ImageView doorView;
 
 
@@ -41,7 +32,7 @@ public class Level1Controller extends LevelController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setPane(pane);
+
     }
 
 

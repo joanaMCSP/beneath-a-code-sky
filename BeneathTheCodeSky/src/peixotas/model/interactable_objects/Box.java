@@ -12,6 +12,7 @@ public class Box extends InteractableObject {
     }
 
     public void push() {
+        System.out.println("this box is being very pushed");
         //representation.push();
     }
 
