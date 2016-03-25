@@ -10,7 +10,6 @@ import peixotas.model.Game;
  */
 public class Main extends Application {
 
-
     //BorderPane root = new BorderPane();
 
     @Override

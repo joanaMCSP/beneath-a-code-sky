@@ -51,8 +51,11 @@ public class Level1Controller implements Initializable {
         ArrayList<InteractableObject> gameObjects = level.getGameObjects();
 
         for (InteractableObject obj : gameObjects) {
+            System.out.println(obj);
             float x = obj.getX();
             float y = obj.getY();
+
+            System.out.println(x + ","+ y);
 
             ImageView view = new ImageView(obj.getFileName());
             view.setX(x);

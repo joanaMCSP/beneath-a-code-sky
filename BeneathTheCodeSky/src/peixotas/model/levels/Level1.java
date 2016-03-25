@@ -16,8 +16,8 @@ import java.util.HashMap;
 public class Level1 extends Level {
 
     private Level1Controller controller;
-    private Door door;
     private ArrayList<InteractableObject> gameObjects;
+    //private Door door;
 
     public Level1 (){
         gameObjects = new ArrayList<>();
@@ -45,9 +45,9 @@ public class Level1 extends Level {
         return gameObjects;
     }
 
-    public Door getDoor() {
+    /*public Door getDoor() {
         return door;
-    }
+    }*/
 
     public void run(){
         init();
@@ -58,16 +58,17 @@ public class Level1 extends Level {
         this.controller = controller;
     }
 
-    public Door createDoor() {
+    public void createObjects() {
+        Door door = new Door(700,400);
+        System.out.println("anto print: " + door.getX());
+
+
+        gameObjects.add(door);
+    }
+
+    /*public Door createDoor() {
         door = new Door(700, 300);
 
         return door;
-    }
-
-
-    public void createObjects() {
-
-        Door door = new Door(700,400);
-        gameObjects.add(door);
-    }
+    }*/
 }

@@ -8,9 +8,6 @@ public class Door extends InteractableObject {
 
     private Interactable representation;
     private boolean open;
-    private float x;
-    private float y;
-
 
     public Door(float x, float y) {
         super(x,y,"gameobjects/door.png");
@@ -24,11 +21,4 @@ public class Door extends InteractableObject {
         return open;
     }
 
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
-    }
 }
