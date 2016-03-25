@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
@@ -113,7 +114,7 @@ public abstract class LevelController implements Controller {
                         break;
                     case ENTER:
                         console.setVisible(true);
-                        console.setStyle("-fx-text-fill: green");
+                        console.setStyle("-fx-background-color: black; -fx-text-fill: green");
                         submit_button.setVisible(true);
                         break;
                     case ESCAPE:
