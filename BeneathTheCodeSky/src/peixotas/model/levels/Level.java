@@ -16,8 +16,6 @@ public interface Level {
 
     void setController(LevelController levelController);
 
-    void createObjects();
-
     void run();
 
 }

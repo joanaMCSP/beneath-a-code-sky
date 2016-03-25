@@ -1,17 +1,27 @@
 package peixotas.model.levels;
 
+import peixotas.ObjectList;
 import peixotas.controller.Level1Controller;
 import peixotas.controller.LevelController;
 import peixotas.model.interactable_objects.Door;
 import peixotas.model.interactable_objects.InteractableObject;
+import peixotas.view.representations.Interactable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Created by codecadet on 24/03/16.
  */
 //public class Level1 extends Levelii {
 public class Level1 implements Level {
+
+
+    private float DOOR_X = 700;
+    private float DOOR_Y = 400;
 
     private LevelController controller;
     private ArrayList<InteractableObject> gameObjects;
@@ -22,13 +32,25 @@ public class Level1 implements Level {
 
     public void init(){
 
-        createObjects();
-        // necessary objects for this lvl, in string
         String[] levelObjects = new String[]{"door","key"};
+        HashMap<String,String> objects = ObjectList.getInstance().getInteractableObjectMap(levelObjects);
 
-        // ask Global for levelObject "door" and "key"
-        //HashMap<String, String> temp = Global.getInteractableObjectMap(levelObjects);
-        //TODO: Antoninho Reflection!!!!!!!!
+
+        try {
+            createObjects(objects);
+
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -41,11 +63,21 @@ public class Level1 implements Level {
         this.controller = levelController;
     }
 
-    public void createObjects() {
-        Door door = new Door(700,400);
-        System.out.println("anto print: " + door.getX());
+    public void createObjects(HashMap<String, String> objects) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
 
-        gameObjects.add(door);
+        Set<String> keys = objects.keySet();
+
+        for (String s: keys) {
+
+            Class fullClass = Class.forName(objects.get(s));
+            Constructor constructor = fullClass.getConstructor(Float.TYPE,Float.TYPE);
+
+            InteractableObject obj = (InteractableObject) constructor.newInstance(DOOR_X,DOOR_Y);
+
+            gameObjects.add(obj);
+            System.out.println(gameObjects);
+        }
+
     }
 
     public void run(){
