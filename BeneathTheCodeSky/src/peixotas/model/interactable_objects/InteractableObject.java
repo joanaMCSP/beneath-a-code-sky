@@ -5,4 +5,6 @@ package peixotas.model.interactable_objects;
  */
 public abstract class InteractableObject {
 
+
+
 }

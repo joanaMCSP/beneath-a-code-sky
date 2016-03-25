@@ -29,6 +29,7 @@ public class Parser {
 
 
     }
+
     public Map<Integer, Map<String, String>> parse(String inputText) {
         Scanner inputTextScanner = new Scanner(inputText);
         Map<Integer, Map<String, String>> result = new HashMap<Integer, Map<String, String>>();

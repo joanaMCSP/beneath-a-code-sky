@@ -1,7 +1,10 @@
 package peixotas.model.levels;
 
+import peixotas.controller.Level1Controller;
+import peixotas.controller.LevelController;
 import peixotas.model.interactable_objects.InteractableObject;
 import peixotas.model.level_objects.LevelObject;
+import sun.reflect.Reflection;
 
 import java.util.List;
 import java.util.Map;
@@ -11,12 +14,18 @@ import java.util.Map;
  */
 public abstract class Level {
 
-    private List<LevelObject> levelObjects;
+    // plataforma e chão list
+    //private List<LevelObject> levelObjects;
+
     private Map<String, InteractableObject> interactableObjectMap;
     private boolean complete;
+    private LevelController levelController;
 
+    //Reflection
 
-
+    public void setController(Level1Controller controller) {
+        this.levelController = levelController;
+    }
 
     public boolean isComplete() {
         return complete;

@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -66,7 +67,9 @@ public class Navigation {
         try {
             FXMLLoader fxmlLoader;
 
-            fxmlLoader = new FXMLLoader(getClass().getResource(VIEW_PATH + view + ".fxml"));
+            String s = VIEW_PATH + view + ".fxml";
+            fxmlLoader = new FXMLLoader(getClass().getResource(s));
+
             Parent root = fxmlLoader.load();
 
             controllers.put(view, fxmlLoader.getController());
@@ -80,6 +83,10 @@ public class Navigation {
             System.out.println("Failure to load view " + view + ": " + ioe.getMessage());
         }
 
+    }
+
+    public Initializable getInitializable (String view) {
+        return controllers.get(view);
     }
 
 }
