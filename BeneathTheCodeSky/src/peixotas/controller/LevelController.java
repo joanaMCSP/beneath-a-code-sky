@@ -16,6 +16,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import peixotas.model.Player;
@@ -102,7 +103,7 @@ public abstract class LevelController implements Controller {
                         break;
                     case ENTER:
                         console.setVisible(true);
-                        console.setStyle("-fx-text-fill: green");
+                        console.setStyle("-fx-background-color: black; -fx-text-fill: green");
                         submit_button.setVisible(true);
                         break;
                     case ESCAPE:
