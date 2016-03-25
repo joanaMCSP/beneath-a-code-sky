@@ -10,6 +10,7 @@ import peixotas.model.Game;
 import peixotas.model.levels.Level;
 import peixotas.model.levels.Level1;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,6 +44,14 @@ public class SplashController implements Initializable, Controller {
 
         // settar o player no controller do view1
         level1Controller.loadPlayer(game.getPlayer());
+
+        try {
+            level.execute("box.push\ndoor.open\nkey.drop");
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         //game.getPlayer();
 

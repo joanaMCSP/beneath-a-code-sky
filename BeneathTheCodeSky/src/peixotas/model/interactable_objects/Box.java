@@ -9,12 +9,13 @@ public class Box extends InteractableObject {
 
     private Interactable representation;
 
-    public Box(float x, float y, String fileName, Interactable representation) {
-        super(x, y, fileName);
+    public Box(float x, float y) {
+        super(x, y, "gameobjects/box.png");
         this.representation = representation;
     }
 
     public void push() {
+        System.out.println("this box is being very pushed");
         //representation.push();
     }
 
