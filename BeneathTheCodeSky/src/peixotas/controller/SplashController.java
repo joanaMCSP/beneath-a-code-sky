@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import peixotas.Navigation;
 import peixotas.model.Game;
+import peixotas.model.levels.Level;
 import peixotas.model.levels.Level1;
 
 import java.net.URL;
@@ -25,17 +26,20 @@ public class SplashController implements Initializable {
     void startButtonPressed(ActionEvent event) {
 
         // criar o level1 no model
-        Level1 level1 = new Level1();
+        Level level = new Level1();
 
         // criar o level 1 no view
         Navigation.getInstance().loadScreen("level1");
 
         // settar o controller no level1
-        Level1Controller level1Controller = (Level1Controller) Navigation.getInstance().getInitializable("level1");
-        level1.setController(level1Controller);
+        LevelController level1Controller = (LevelController) Navigation.getInstance().getInitializable("level1");
+        level.setController(level1Controller);
+        level.run();
 
         // settar o level1 no controller do level1
-        level1Controller.setLevel(level1);
+        level1Controller.loadLevel(level);
+
+
     }
 
     @Override

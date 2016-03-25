@@ -9,7 +9,8 @@ public class Box extends InteractableObject {
 
     private Interactable representation;
 
-    public Box(Interactable representation){
+    public Box(float x, float y, String fileName, Interactable representation) {
+        super(x, y, fileName);
         this.representation = representation;
     }
 

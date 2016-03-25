@@ -10,8 +10,9 @@ public class Key extends InteractableObject {
     private boolean used;
     private boolean grabbed;
 
-    public Key(Movable representation) {
-        this.representation = representation;
+    public Key(float x, float y, String fileName, boolean used) {
+        super(x, y, fileName);
+        this.used = used;
     }
 
     public boolean isUsed() {
