@@ -7,8 +7,10 @@ import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -27,8 +29,16 @@ import java.util.Collection;
  */
 public abstract class LevelController implements Controller {
 
-    //private Level level;
+    @FXML
     private Pane pane;
+
+    @FXML
+    private ImageView bgImage;
+
+    @FXML
+    private TextArea console;
+
+    //private Level level;
     private Animation playerAnim;
     private ImageView playerView;
     private Scene scene;
@@ -51,10 +61,6 @@ public abstract class LevelController implements Controller {
             lastUpdateTime.set(timestamp);
         }
     };
-
-    public void setPane(Pane pane) {
-        this.pane = pane;
-    }
 
     public void loadLevel(Level level) {
 
@@ -80,15 +86,23 @@ public abstract class LevelController implements Controller {
                     case RIGHT:
                         velocity.set(100);
                         playerView.setScaleX(1);
+                        animation.start();
+                        playerAnim.play();
                         break;
                     case LEFT:
                         velocity.set(-100);
                         playerView.setScaleX(-1);
+                        animation.start();
+                        playerAnim.play();
+                        break;
+                    case ENTER:
+                        console.setVisible(true);
+                        break;
+                    case ESCAPE:
+                        console.setVisible(false);
                         break;
                 }
 
-                animation.start();
-                playerAnim.play();
             }
         });
 
