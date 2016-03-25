@@ -8,7 +8,7 @@
 
 <VBox prefHeight="672.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="peixotas.controller.Level1Controller">
    <children>
-      <Pane prefHeight="672.0" prefWidth="1280.0">
+      <Pane fx:id="level_pane" prefHeight="672.0" prefWidth="1280.0">
          <children>
             <ImageView id="bg" fx:id="bgImage" fitHeight="721.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -16,6 +16,7 @@
                </image>
             </ImageView>
             <TextArea fx:id="console" opacity="0.25" prefHeight="200.0" prefWidth="1280.0" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="826.0" layoutY="720.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </children>

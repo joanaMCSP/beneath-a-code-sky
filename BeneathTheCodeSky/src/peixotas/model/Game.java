@@ -37,8 +37,8 @@ public /*not abstract */class Game {
         return levels;
     }
 
-/*    public void nextLevel(){
-        Level level = new Level
+    /*public void nextLevel(){
+        Level level = new Level1();
     }*/
 
     public void addLevel(Level level) {

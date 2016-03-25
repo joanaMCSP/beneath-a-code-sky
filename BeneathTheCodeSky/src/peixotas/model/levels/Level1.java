@@ -32,7 +32,7 @@ public class Level1 extends Level {
         //TODO: Antoninho Reflection!!!!!!!!
 
         // new door at x:1m, y:0m
-        Door door = new Door(1, 0);
+        //door = new Door(1, 0);
 
 
     }
@@ -43,7 +43,15 @@ public class Level1 extends Level {
 
     public void run(){
         init();
-
     }
 
+    @Override
+    public void setController(Level1Controller controller) {
+        this.controller = controller;
+    }
+
+    public Door createDoor() {
+        door = new Door(700, 300);
+        return door;
+    }
 }

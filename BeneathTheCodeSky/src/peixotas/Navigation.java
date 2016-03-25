@@ -73,6 +73,7 @@ public class Navigation {
             Parent root = fxmlLoader.load();
 
             controllers.put(view, fxmlLoader.getController());
+            System.out.println("adding controller" + controllers.get(view));
 
             Scene scene = new Scene(root, MIN_WIDTH, MIN_HEIGHT);
             scenes.push(scene);
