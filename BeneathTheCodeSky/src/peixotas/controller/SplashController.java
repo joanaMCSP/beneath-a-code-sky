@@ -45,14 +45,16 @@ public class SplashController implements Initializable, Controller {
         // settar o player no controller do view1
         level1Controller.loadPlayer(game.getPlayer());
 
-        //game.getPlayer();
         try {
-            level.execute("door.open");
+            level.execute("box.push\ndoor.open\nkey.drop");
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+
+        //game.getPlayer();
+
 
     }
 
