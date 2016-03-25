@@ -25,6 +25,7 @@ import peixotas.model.levels.Level;
 import peixotas.view.SpriteAnimation;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,7 +47,7 @@ public abstract class LevelController implements Controller {
     @FXML
     private Button submit_button;
 
-    //private Level level;
+    private Level level;
     private Animation playerAnim;
     private ImageView playerView;
     private Scene scene;
@@ -71,7 +72,11 @@ public abstract class LevelController implements Controller {
         }
     };
 
-    public void loadLevel(Level level) {
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public void loadLevel() {
 
         Collection<InteractableObject> gameObjects = level.getInteractableObjects();
 
@@ -170,8 +175,14 @@ public abstract class LevelController implements Controller {
 
     @FXML
     void onSubmitButtonClicked(ActionEvent event) {
-        console.getText();
-        System.out.println(console.getText());
+        try {
+            level.execute(console.getText());
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+//        System.out.println(console.getText());
     }
 
     public void movePlayer(int x) {
