@@ -7,6 +7,7 @@ import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -27,7 +28,7 @@ public abstract class LevelController implements Controller {
 
     //private Level level;
     private Pane pane;
-    private Player player;
+    private Animation playerAnim;
     private ImageView playerView;
     private Scene scene;
     //private Rectangle2D rectangle2D;
@@ -56,6 +57,20 @@ public abstract class LevelController implements Controller {
 
     public void loadLevel(Level level) {
 
+        ArrayList<InteractableObject> gameObjects = level.getGameObjects();
+
+        for (InteractableObject obj : gameObjects) {
+            float x = obj.getX();
+            float y = obj.getY();
+
+            ImageView view = new ImageView(obj.getFileName());
+            view.setX(x);
+            view.setY(y);
+
+            pane.getChildren().add(view);
+            views.add(view);
+        }
+
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -72,6 +87,7 @@ public abstract class LevelController implements Controller {
                 }
 
                 animation.start();
+                playerAnim.play();
             }
         });
 
@@ -79,63 +95,33 @@ public abstract class LevelController implements Controller {
             @Override
             public void handle(KeyEvent event) {
                 velocity.set(0);
+                playerAnim.stop();
             }
         });
 
         animation.start();
-        ArrayList<InteractableObject> gameObjects = level.getGameObjects();
-
-        for (InteractableObject obj : gameObjects) {
-            float x = obj.getX();
-            float y = obj.getY();
-
-            ImageView view = new ImageView(obj.getFileName());
-            view.setX(x);
-            view.setY(y);
-
-            pane.getChildren().add(view);
-            views.add(view);
-        }
 
     }
 
     public void loadPlayer(Player player) {
-        this.player = player;
-
         float px = player.getX();
         float py = player.getY();
 
         playerView = new ImageView(player.getFileName());
-        //rectangle2D = new Rectangle2D(px, py, Game.WIDTH, Game.HEIGHT);
-
-        //playerView.setViewport(rectangle2D);
-
-        /*animation = new SpriteAnimation(playerView,
-                Duration.millis(1000),
-                Game.COUNT, Game.COLUMNS,
-                Game.OFFSET_X, Game.OFFSET_Y,
-                Game.WIDTH, Game.HEIGHT);*/
-
-        //animation.setCycleCount(Animation.INDEFINITE);
-
-        //animation.play();
-
+        playerView.setViewport(new Rectangle2D(player.OFFSET_X, player.OFFSET_Y, player.WIDTH, player.HEIGHT));
         playerView.setY(px);
         playerView.setY(py);
 
         pane.getChildren().add(playerView);
 
-        //installEventHandler(playerView);
-
-        final Animation animation = new SpriteAnimation(
+        playerAnim = new SpriteAnimation(
                 playerView,
                 Duration.millis(1000),
                 player.COUNT, player.COLUMNS,
                 player.OFFSET_X, player.OFFSET_Y,
                 player.WIDTH, player.HEIGHT
         );
-        animation.setCycleCount(Animation.INDEFINITE);
-        animation.play();
+        playerAnim.setCycleCount(Animation.INDEFINITE);
 
 
     }
