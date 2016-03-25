@@ -42,7 +42,7 @@ public class Level1 implements Level {
     }
 
     public void createObjects() {
-        Door door = new Door(700,400);
+        Door door = new Door(1000,400);
         System.out.println("anto print: " + door.getX());
 
         gameObjects.add(door);

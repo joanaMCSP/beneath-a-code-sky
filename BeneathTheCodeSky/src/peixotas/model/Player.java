@@ -5,7 +5,34 @@ package peixotas.model;
  */
 public class Player {
 
-    private int x;
-    private int y;
+    private float x;
+    private float y;
+    private String fileName;
 
+    public Player(float x, float y) {
+        this.x = x;
+        this.y = y;
+        fileName = "gameobjects/playerSprite.png";
+
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void moveX() {
+
+    }
+
+    public void jump() {
+
+    }
 }

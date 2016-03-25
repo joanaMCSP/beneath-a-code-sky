@@ -39,6 +39,12 @@ public class SplashController implements Initializable {
         // settar o level1 no controller do level1
         level1Controller.loadLevel(level);
 
+        // settar o player no controller do view1
+        System.out.println("ppppasd" + game.getPlayer());
+        level1Controller.loadPlayer(game.getPlayer());
+
+        //game.getPlayer();
+
 
     }
 
