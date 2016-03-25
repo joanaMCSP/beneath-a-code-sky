@@ -90,7 +90,7 @@ public abstract class Level {
 
                 try {
                     Method instruction = interactableObjects.get(object).getClass().getDeclaredMethod(method);
-                    instruction.invoke(object);
+                    instruction.invoke(interactableObjects.get(object));
                 } catch (NoSuchMethodException e) {
                     System.out.println("There is no method with this name");
                 }

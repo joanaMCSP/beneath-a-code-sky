@@ -18,6 +18,7 @@ public class Level1 extends Level {
         levelObjects = new HashMap<>();
         levelObjects.put("door", new int[]{400,400});
 
+
     }
 
     private Map<String, InteractableObject> interactableObjects;

@@ -16,7 +16,7 @@ public class Door extends InteractableObject {
     public void open() {
 
         System.out.println("the door is open. wide.");
-        //open = true; THIS IS THE REAL COMMAND!!!!!
+        open = true;
     }
 
     public boolean isOpen() {
