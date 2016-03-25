@@ -33,9 +33,12 @@ public class SplashController implements Initializable {
         // settar o controller no level1
         Level1Controller level1Controller = (Level1Controller) Navigation.getInstance().getInitializable("level1");
         level1.setController(level1Controller);
+        level1.run();
 
         // settar o level1 no controller do level1
         level1Controller.setLevel(level1);
+
+
     }
 
     @Override

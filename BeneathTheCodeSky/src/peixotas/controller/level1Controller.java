@@ -7,9 +7,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import peixotas.model.interactable_objects.Door;
+import peixotas.model.interactable_objects.InteractableObject;
 import peixotas.model.levels.Level1;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -18,7 +20,8 @@ import java.util.ResourceBundle;
 public class Level1Controller implements Initializable {
 
     private Level1 level;
-    private Door door;
+    private ArrayList<ImageView> views = new ArrayList<>();
+    //private Door door;
 
     @FXML
     private Pane level_pane;
@@ -39,26 +42,26 @@ public class Level1Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //getDoorFromModel();
-        //door = level.createDoor();
+
     }
 
     public void setLevel(Level1 level) {
         this.level = level;
-        System.out.println("level: " + level);
-        door = level.createDoor();
-        System.out.println(level.getDoor());
 
-        float x = door.getX();
-        float y = door.getY();
+        ArrayList<InteractableObject> gameObjects = level.getGameObjects();
 
+        for (InteractableObject obj : gameObjects) {
+            float x = obj.getX();
+            float y = obj.getY();
 
-        // move this from here asap
-        doorView = new ImageView("gameobjects/door.png");
-        doorView.setX(x);
-        doorView.setY(y);
+            ImageView view = new ImageView(obj.getFileName());
+            view.setX(x);
+            view.setY(y);
 
-        level_pane.getChildren().add(doorView);
+            level_pane.getChildren().add(view);
+            views.add(view);
+        }
+
 
     }
 

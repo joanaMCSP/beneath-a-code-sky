@@ -13,14 +13,7 @@ public class Door extends InteractableObject {
 
 
     public Door(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public Door(Interactable representation) {
-        this.representation = representation;
-        float x = 100;
-        float y = 100;
+        super(x,y,"gameobjects/door.png");
     }
 
     public void open() {

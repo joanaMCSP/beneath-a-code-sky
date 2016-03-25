@@ -6,5 +6,26 @@ package peixotas.model.interactable_objects;
 public abstract class InteractableObject {
 
 
+    private float x;
+    private float y;
+    private String fileName;
+
+    public InteractableObject(float x, float y, String fileName) {
+        this.x = x;
+        this.y = y;
+        this.fileName = fileName;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
 
 }
