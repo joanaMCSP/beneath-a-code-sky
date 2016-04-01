@@ -1,5 +1,6 @@
 package peixotas;
 
+import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import peixotas.controller.SplashController;
@@ -10,8 +11,6 @@ import peixotas.model.Game;
  */
 public class Main extends Application {
 
-    //BorderPane root = new BorderPane();
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -20,6 +19,7 @@ public class Main extends Application {
         Navigation.getInstance().loadScreen("splash");
 
         Game game = new Game();
+        game.run();
 
         SplashController splashController = (SplashController) Navigation.getInstance().getInitializable("splash");
         splashController.setGame(game);

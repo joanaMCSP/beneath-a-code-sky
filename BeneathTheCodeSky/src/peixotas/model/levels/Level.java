@@ -28,8 +28,10 @@ public abstract class Level {
     public void init() {
 
         try {
-            createObjects();
+            //todo:initial game objects should not be created through reflection
+            //todo: come up with other initial object creation logic.what where we thinking?
 
+            createObjects();
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -42,21 +44,33 @@ public abstract class Level {
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
-
     }
 
     public Collection<InteractableObject> getInteractableObjects() {
         //System.out.println(interactableObjects.values());
         return interactableObjects.values();
-
-
     }
 
     public void setController(LevelController levelController) {
         this.controller = levelController;
     }
 
-    private void createObjects() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    /**
+     * Initialization of initial level objects through reflection - THIS MAKES NO SENSE AT ALL
+     * TODO: REFLECTION SHOULD ONLY BE USED TO PROCESS USER INPUT
+     *
+     * @throws ClassNotFoundException
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws InstantiationException
+     */
+    private void createObjects()
+            throws ClassNotFoundException,
+            NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
 
         HashMap<String, String> objects = ObjectList.getInstance().getInteractableObjectMap(levelObjects.keySet());
 
@@ -70,9 +84,8 @@ public abstract class Level {
 
             InteractableObject obj = (InteractableObject) constructor.newInstance(levelObjects.get(s)[0], levelObjects.get(s)[1]);
 
-
+            //not sure why we do this here
             obj.getClass().getDeclaredMethods();
-
 
             interactableObjects.put(s, obj);
 
@@ -80,6 +93,18 @@ public abstract class Level {
 
     }
 
+    /**
+     * Calls parse() method to process user input and creates a String[] in which
+     * the first position represents the Class and the second position represents
+     * the method to be invoked
+     * Checks if the instance of the class exists, if it does then proceeds to iterating
+     * through the declared methods of the class until there's a match
+     * If there is a match, the method is invoked;
+     *
+     * @param code String from userInput
+     * @throws InvocationTargetException if user input does not match a declared method
+     * @throws IllegalAccessException
+     */
     public void execute(String code) throws InvocationTargetException, IllegalAccessException {
         List<String[]> commands = Parser.parse(code);
 
@@ -109,6 +134,7 @@ public abstract class Level {
 
 
     public void run() {
+        //// TODO: 01/04/16 :create a game loop somehow
         init();
     }
 

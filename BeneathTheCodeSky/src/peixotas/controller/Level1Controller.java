@@ -3,16 +3,14 @@ package peixotas.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import peixotas.model.interactable_objects.Door;
-import peixotas.model.interactable_objects.InteractableObject;
-import peixotas.model.levels.Level;
-import peixotas.model.levels.Level1;
+
 
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
 /**

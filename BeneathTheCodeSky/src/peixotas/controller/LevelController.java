@@ -239,7 +239,13 @@ public abstract class LevelController implements Controller {
 
     }
 
+    private void playSound() {
+        if (plonkSound.isPlaying()) {
+            return;
+        }
 
+        plonkSound.play();
+    }
 
     /*private void installEventHandler(final Node keyboardNode) {
         final EventHandler<KeyEvent> key = new EventHandler<KeyEvent>() {
@@ -254,12 +260,6 @@ public abstract class LevelController implements Controller {
         };
     }*/
 
-    private void playSound() {
-        if (plonkSound.isPlaying()) {
-            return;
-        }
 
-        plonkSound.play();
-    }
 
 }

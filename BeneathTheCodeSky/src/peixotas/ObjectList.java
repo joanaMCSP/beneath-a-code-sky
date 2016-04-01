@@ -39,12 +39,17 @@ public class ObjectList {
         objectList.put("tester", "peixotas.Tester");
     }
 
-
-    public HashMap<String, String> getInteractableObjectMap(Set<String> objects) {
+    /**
+     *
+     *
+     * @param  //set <String> representing objects to instanciate for level initialization
+     * @return HashMap levelO <String, String> = <UserInputObject, ClassPathToThatObject >
+     */
+    public HashMap<String, String> getInteractableObjectMap(Set<String> levelObjects) {
 
         HashMap<String, String> result = new HashMap<>();
 
-        for (String o : objects) {
+        for (String o : levelObjects) {
             if (objectList.containsKey(o)) {
                 result.put(o, objectList.get(o));
             }
