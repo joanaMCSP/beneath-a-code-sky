@@ -14,11 +14,11 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception {
 
-
         Navigation.getInstance().setStage(primaryStage);
         primaryStage.setTitle("Beneath the CodeSky");
         primaryStage.show();
         Navigation.getInstance().loadScreen("initial");
+
 
 
 

@@ -1,3 +1,4 @@
+import controller.Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -52,18 +53,18 @@ public class Navigation {
 
             root = fxmlLoader.load();
 
+            Controller controller = fxmlLoader.getController();
             //Store the controller
-            controllers.put(view, (Initializable)fxmlLoader.getController());
+            controllers.put(view, controller);
 
             // Create a new scene and add it to the stack
             Scene scene = new Scene(root, MIN_WIDTH, MIN_HEIGHT);
-            scene.getStylesheets().add(view + ".css");
+            controller.setScene(scene);
             scenes.push(scene);
-
 
             // Put the scene on the stage
             setScene(scene);
-
+            controller.loadLevel();
 
         } catch (IOException e) {
             System.out.println("Failure to load view " + view + " : " + e.getMessage());
