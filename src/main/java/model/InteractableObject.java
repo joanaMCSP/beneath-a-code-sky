@@ -7,6 +7,7 @@ package model;
 public abstract class InteractableObject {
 
 
+    //TODO: this calls for an Enum..
     private float x;
     private float y;
     private String fileName;

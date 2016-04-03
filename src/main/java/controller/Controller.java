@@ -11,9 +11,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import model.Box;
 import model.InteractableObject;
-import model.Level;
+import model.Level1;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -27,7 +26,7 @@ import java.util.ResourceBundle;
  */
 public class Controller implements Initializable {
 
-    private Level level;
+    private Level1 level;
     private Scene scene;
 
 
@@ -50,7 +49,7 @@ public class Controller implements Initializable {
 
 
     /**
-     * processes input from the console and performs action on objects
+     * Processes input from the console and performs action on objects
      * @param event
      */
     @FXML
@@ -68,13 +67,15 @@ public class Controller implements Initializable {
 
 
     /**
+     * Initial level setup.
+     * Gets interactableObject instances and associates them with a view in representatioMap
+     * Starts Keys Event Handler todo: this should be its own method
      *
      */
     public void loadLevel() {
 
-        level = new Level();
+        level = new Level1();
         representationMap = new HashMap<InteractableObject, ImageView>();
-
 
         Collection<InteractableObject> levelInteractableObjects = level.getInteractableObjects();
 
@@ -141,6 +142,10 @@ public class Controller implements Initializable {
 
     }
 
+    /**
+     * Moves representations according to invoked methods
+     * @param collection
+     */
     private void moveInteractableObject(Collection<InteractableObject> collection) {
         for (InteractableObject object : collection) {
             if (representationMap.containsKey(object)) {

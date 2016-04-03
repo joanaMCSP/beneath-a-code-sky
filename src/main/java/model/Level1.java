@@ -11,34 +11,46 @@ import java.util.*;
 /**
  * Created by joana on 4/3/16.
  */
-public class Level {
+public class Level1 {
 
     private Controller controller;
+    private Map<String, int[]> interactableObjectNamePos;
     private Map<String, InteractableObject> interactableObjects;
-    private Map<String, int[]> levelObjects;
 
 
-    public Level() {
+
+    public Level1() {
         interactableObjects = new HashMap<String, InteractableObject>();
-        setLevelObjects();
-        init();
-
+        setLevelInteractables();
+        init();//todo : run method that calls init might be best
     }
 
-    public void setLevelObjects(){
-        levelObjects = new HashMap<String, int[]>();
-        levelObjects.put("box", new int[]{200, 300});
-        levelObjects.put("key", new int[]{500, 100});
-        //levelObjects.put("box", new int[]{200, 400})
+    /**
+     * Indicates which objects should be instantiated for this level
+     * and sets their initial position
+     */
+    public void setLevelInteractables(){
+        interactableObjectNamePos = new HashMap<String, int[]>();
+        interactableObjectNamePos.put("box", new int[]{200, 300});
+        interactableObjectNamePos.put("key", new int[]{500, 100});
+        //what if there is more than one box?
+    }
 
+    /**
+     * Gets the interactableObject instances (values) from the HashMap
+     * @return
+     */
+    public Collection<InteractableObject> getInteractableObjects() {
+        return interactableObjects.values();
     }
 
 
-
+    /**
+     * Initializes Level1 and handles all Reflection exceptions
+     */
     public void init() {
 
         try {
-
 
             createObjects();
 
@@ -55,17 +67,12 @@ public class Level {
         }
     }
 
-    public Collection<InteractableObject> getInteractableObjects() {
-        return interactableObjects.values();
-    }
 
-    public void setController(Controller levelController) {
-        this.controller = levelController;
-    }
+
 
     /**
-     * Initialization of initial level objects through reflection - THIS MAKES NO SENSE AT ALL
-     *
+     * Initialization of level objects through Reflection API
+     * Gets initial interactables specifyed for this level and instantiates them
      * @throws ClassNotFoundException
      * @throws NoSuchMethodException
      * @throws IllegalAccessException
@@ -79,7 +86,7 @@ public class Level {
             InvocationTargetException,
             InstantiationException {
 
-        HashMap<String, String> objects = ObjectList.getInstance().getInteractableObjectMap(levelObjects.keySet());
+        HashMap<String, String> objects = ClassMap.getInstance().getInteractableObjectMap(interactableObjectNamePos.keySet());
 
         Set<String> keys = objects.keySet();
 
@@ -89,7 +96,7 @@ public class Level {
             Class fullClass = Class.forName(objects.get(s));
             Constructor constructor = fullClass.getConstructor(Float.TYPE, Float.TYPE);
 
-            InteractableObject obj = (InteractableObject) constructor.newInstance(levelObjects.get(s)[0], levelObjects.get(s)[1]);
+            InteractableObject obj = (InteractableObject) constructor.newInstance(interactableObjectNamePos.get(s)[0], interactableObjectNamePos.get(s)[1]);
 
 
             obj.getClass().getDeclaredMethods();
@@ -135,14 +142,7 @@ public class Level {
     }
 
     private boolean objectExists(String object) {
-
         return interactableObjects.containsKey(object);
     }
-
-
-    public void run() {
-        init();
-    }
-
 
 }
