@@ -31,13 +31,14 @@ public class ClassMap {
     }
 
     /**
-     * Define interactables for the Game
+     * Define interactables for the model.Game
      * and maps them to the corresponding Class
      */
     private void populateList() {
         String path = "model.";
         interactablesList.put("box", path + "Box");
         interactablesList.put("key", path + "Key");
+        interactablesList.put("door",path +"Door");
     }
 
     /**

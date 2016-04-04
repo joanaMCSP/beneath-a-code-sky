@@ -7,7 +7,7 @@ package model;
 public class Box extends InteractableObject {
 
     public Box(float x, float y) {
-        super(x, y, "box.png");
+        super(x, y, "interactables/box.png");
     }
 
     public void push() {

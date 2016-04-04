@@ -1,6 +1,6 @@
 package model;
 
-import controller.Controller;
+import controllers.Level1Controller;
 import terminal.Parser;
 
 import java.lang.reflect.Constructor;
@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class Level1 {
 
-    private Controller controller;
+    private Level1Controller controller;
     private Map<String, int[]> interactableObjectNamePos;
     private Map<String, InteractableObject> interactableObjects;
 
@@ -145,4 +145,7 @@ public class Level1 {
         return interactableObjects.containsKey(object);
     }
 
+    public void setController(Level1Controller controller) {
+        this.controller = controller;
+    }
 }

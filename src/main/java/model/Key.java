@@ -6,7 +6,7 @@ package model;
 public class Key extends InteractableObject {
 
     public Key(float x, float y) {
-        super(x, y, "key.png");
+        super(x, y, "interactables/key.png");
     }
 
     public void drop() {

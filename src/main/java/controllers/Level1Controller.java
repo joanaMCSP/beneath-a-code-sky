@@ -1,37 +1,72 @@
-package controller;
+package controllers;
 
 
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
+import javafx.util.Duration;
 import model.InteractableObject;
 import model.Level1;
+import model.Player;
+import model.SpriteAnimation;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+
 /**
  * Created by joana on 4/3/16.
  */
-public class Controller implements Initializable {
+public class Level1Controller implements Initializable, Controller {
 
     private Level1 level;
     private Scene scene;
 
 
     private HashMap<InteractableObject, ImageView> representationMap;
+
+    final DoubleProperty velocity = new SimpleDoubleProperty();
+    final LongProperty lastUpdateTime = new SimpleLongProperty();
     private ArrayList<ImageView> views = new ArrayList<ImageView>();
+    private Animation playerAnim;
+    private ImageView playerView;
+    private AudioClip plonkSound;
+
+
+    final AnimationTimer animation = new AnimationTimer() {
+        @Override
+        public void handle(long timestamp) {
+            if (lastUpdateTime.get() > 0) {
+                final double elapsedSeconds = (timestamp - lastUpdateTime.get()) / 1000000000.0;
+                final double deltaX = elapsedSeconds * velocity.get();
+                final double oldX = playerView.getTranslateX();
+                final double newX = Math.max(0, Math.min(1200, oldX + deltaX));
+                playerView.setTranslateX(newX);
+            }
+            lastUpdateTime.set(timestamp);
+        }
+    };
 
 
     @FXML
@@ -46,7 +81,6 @@ public class Controller implements Initializable {
 
 
     }
-
 
     /**
      * Processes input from the console and performs action on objects
@@ -74,7 +108,8 @@ public class Controller implements Initializable {
      */
     public void loadLevel() {
 
-        level = new Level1();
+
+
         representationMap = new HashMap<InteractableObject, ImageView>();
 
         Collection<InteractableObject> levelInteractableObjects = level.getInteractableObjects();
@@ -100,18 +135,18 @@ public class Controller implements Initializable {
 
                 switch (event.getCode()) {
                     case RIGHT:
-                        /*velocity.set(100);
+                        velocity.set(100);
                         playerView.setScaleX(1);
                         animation.start();
                         playerAnim.play();
-                        playSound();*/
+                        playSound();
                         break;
                     case LEFT:
-                        /*velocity.set(-100);
+                        velocity.set(-100);
                         playerView.setScaleX(-1);
                         animation.start();
                         playerAnim.play();
-                        playSound();*/
+                        playSound();
                         break;
                     case ENTER:
                         //console.setPrefHeight(200);
@@ -129,17 +164,56 @@ public class Controller implements Initializable {
             }
         });
 
-        /*scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
                 velocity.set(0);
                 playerAnim.stop();
             }
-        })*/
+        })
         ;
-        //animation.start();
+        animation.start();
 
 
+    }
+
+    private void playSound() {
+        if (plonkSound.isPlaying()) {
+            return;
+        }
+
+        plonkSound.play();
+    }
+
+    public void loadPlayer(Player player) {
+        float px = player.getX();
+        float py = player.getY();
+
+        String audioFile;
+
+        try {
+            audioFile = new File("src/main/resources/walk.m4a").toURI().toURL().toString();
+            plonkSound = new AudioClip(audioFile);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        playerView = new ImageView(player.getFileName());
+        System.out.println(playerView);
+        playerView.setViewport(new Rectangle2D(player.OFFSET_X, player.OFFSET_Y, player.WIDTH, player.HEIGHT));
+        playerView.setY(px);
+        playerView.setY(py);
+
+        pane.getChildren().add(playerView);
+
+        playerAnim = new SpriteAnimation(
+                playerView,
+                Duration.millis(1000),
+                player.COUNT, player.COLUMNS,
+                player.OFFSET_X, player.OFFSET_Y,
+                player.WIDTH, player.HEIGHT
+        );
+        playerAnim.setCycleCount(Animation.INDEFINITE);
     }
 
     /**
@@ -166,7 +240,12 @@ public class Controller implements Initializable {
 
     }
 
+    public void setLevel(Level1 level) {
+        this.level = level;
+    }
+
     public void setScene(Scene scene) {
         this.scene = scene;
     }
+
 }
