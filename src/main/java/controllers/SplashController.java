@@ -33,6 +33,7 @@ public class SplashController implements Initializable , Controller{
 
          Level1 level = new Level1();
         // criar o level 1 no view
+        level.init();
 
         Navigation.getInstance().loadScreen("level1");
 

@@ -27,7 +27,6 @@ public class Main extends Application {
         SplashController splashController = (SplashController) Navigation.getInstance().getInitializable("splash");
         splashController.setGame(game);
 
-        //game.run();
 
 
 

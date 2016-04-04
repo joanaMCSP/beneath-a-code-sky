@@ -38,23 +38,20 @@ import java.util.ResourceBundle;
 /**
  * Created by joana on 4/3/16.
  */
-public class Level1Controller implements Initializable, Controller {
+public class Level1Controller extends LevelController implements Initializable, Controller {
 
     private Level1 level;
     private Scene scene;
-
-
     private HashMap<InteractableObject, ImageView> representationMap;
+    private ArrayList<ImageView> views = new ArrayList<ImageView>();
 
+    //Animation stuff
     final DoubleProperty velocity = new SimpleDoubleProperty();
     final LongProperty lastUpdateTime = new SimpleLongProperty();
-    private ArrayList<ImageView> views = new ArrayList<ImageView>();
     private Animation playerAnim;
     private ImageView playerView;
     private AudioClip plonkSound;
-
-
-    final AnimationTimer animation = new AnimationTimer() {
+    private final AnimationTimer animation = new AnimationTimer() {
         @Override
         public void handle(long timestamp) {
             if (lastUpdateTime.get() > 0) {
@@ -108,8 +105,6 @@ public class Level1Controller implements Initializable, Controller {
      */
     public void loadLevel() {
 
-
-
         representationMap = new HashMap<InteractableObject, ImageView>();
 
         Collection<InteractableObject> levelInteractableObjects = level.getInteractableObjects();
@@ -126,10 +121,13 @@ public class Level1Controller implements Initializable, Controller {
             view.setY(y);
             pane.getChildren().add(view);
             views.add(view);
-            System.out.println(obj.getFileName());
             view.setVisible(true);
         }
+        handleInput();
+        animation.start();
+    }
 
+    private void handleInput() {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
 
@@ -149,7 +147,7 @@ public class Level1Controller implements Initializable, Controller {
                         playSound();
                         break;
                     case ENTER:
-                        //console.setPrefHeight(200);
+                        console.setPrefHeight(200);
                         console.setVisible(true);
                         console.setStyle("-fx-background-color: black; -fx-text-fill: green");
                         submit_button.setVisible(true);
@@ -163,7 +161,6 @@ public class Level1Controller implements Initializable, Controller {
 
             }
         });
-
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
                 velocity.set(0);
@@ -171,18 +168,16 @@ public class Level1Controller implements Initializable, Controller {
             }
         })
         ;
-        animation.start();
-
-
     }
+
 
     private void playSound() {
         if (plonkSound.isPlaying()) {
             return;
         }
-
         plonkSound.play();
     }
+
 
     public void loadPlayer(Player player) {
         float px = player.getX();
