@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import model.Game;
+import model.Level;
 import model.Level1;
 
 
@@ -29,9 +30,8 @@ public class SplashController implements Initializable , Controller{
     @FXML
     void startButtonPressed(ActionEvent event) {
 
-        // criar o level1 no model
-
-         Level1 level = new Level1();
+        // get level1 from Game
+        Level level = game.getLevels().get(0);
         // criar o level 1 no view
         level.init();
 
@@ -40,18 +40,13 @@ public class SplashController implements Initializable , Controller{
         // settar o controller no level1
         Level1Controller level1Controller = (Level1Controller) Navigation.getInstance().getInitializable("level1");
         level.setController(level1Controller);
-        //level.run();
 
-        // settar o level no controller
-        level1Controller.setLevel(level);
+        // settar o level e o Game no controller
+        level1Controller.setGame(game);
+        level1Controller.setLevel((Level1)level);
 
         // settar o level1 no controller do level1
         level1Controller.loadLevel();
-
-        // settar o player no controller do view1
-        level1Controller.loadPlayer(game.getPlayer());
-
-
 
     }
 

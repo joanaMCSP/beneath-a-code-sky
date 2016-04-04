@@ -27,7 +27,6 @@ public abstract class Level {
 
 
 
-
     public Map<String, int[]> getInteractableObjectNamePos() {
         return interactableObjectNamePos;
     }

@@ -1,5 +1,19 @@
 package model;
 
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import javafx.util.Duration;
+
+import java.io.File;
+import java.net.MalformedURLException;
+
 /**
  * Created by joana on 4/3/16.
  * Only common object through all levels
@@ -14,10 +28,30 @@ public class Player {
     public static final int WIDTH = 100;
     public static final int HEIGHT = 181;
 
-
     private float x;
     private float y;
     private String fileName;
+
+    //Animation stuff
+    final DoubleProperty velocity = new SimpleDoubleProperty();
+    final LongProperty lastUpdateTime = new SimpleLongProperty();
+    private Animation playerAnim;
+    private ImageView playerView;
+    private AudioClip plonkSound;
+    private final AnimationTimer animation = new AnimationTimer() {
+        @Override
+        public void handle(long timestamp) {
+            if (lastUpdateTime.get() > 0) {
+                final double elapsedSeconds = (timestamp - lastUpdateTime.get()) / 1000000000.0;
+                final double deltaX = elapsedSeconds * velocity.get();
+                final double oldX = playerView.getTranslateX();
+                final double newX = Math.max(0, Math.min(1200, oldX + deltaX));
+                playerView.setTranslateX(newX);
+            }
+            lastUpdateTime.set(timestamp);
+        }
+    };
+
 
     public Player(float x, float y) {
         this.x = x;
@@ -26,23 +60,67 @@ public class Player {
 
     }
 
-    public String getFileName() {
-        return fileName;
+    public Animation getPlayerAnim() {
+        return playerAnim;
     }
 
-    public float getY() {
-        return y;
+    public ImageView getPlayerView() {
+        return playerView;
     }
 
-    public float getX() {
-        return x;
+    public AnimationTimer getAnimation() {
+        return animation;
     }
 
-    public void moveX() {
-
+    public double getVelocity() {
+        return velocity.get();
     }
 
-    public void jump() {
-
+    public void setVelocity(double velocity) {
+        this.velocity.set(velocity);
     }
+
+
+    public void load() {
+        float px = x;
+        float py = y;
+
+        String audioFile;
+
+        try {
+            audioFile = new File("src/main/resources/walk.m4a").toURI().toURL().toString();
+            plonkSound = new AudioClip(audioFile);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        playerView = new ImageView(fileName);
+        System.out.println(playerView);
+        playerView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
+        playerView.setY(px);
+        playerView.setY(py);
+
+        //pane.getChildren().add(playerView);
+
+        playerAnim = new SpriteAnimation(
+                playerView,
+                Duration.millis(1000),
+                COUNT, COLUMNS,
+                OFFSET_X, OFFSET_Y,
+                WIDTH, HEIGHT
+        );
+        playerAnim.setCycleCount(Animation.INDEFINITE);
+    }
+
+    public void playSound() {
+        if (plonkSound.isPlaying()) {
+            return;
+        }
+        plonkSound.play();
+    }
+
+
+
+
 }

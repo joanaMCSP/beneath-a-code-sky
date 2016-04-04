@@ -3,6 +3,8 @@ import controllers.SplashController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Game;
+import model.Level;
+import model.Level1;
 
 /**
  * Created by jPeixoto on 15/03/16.
@@ -26,8 +28,8 @@ public class Main extends Application {
         Game game = new Game();
         SplashController splashController = (SplashController) Navigation.getInstance().getInitializable("splash");
         splashController.setGame(game);
-
-
+        Level level = new Level1();
+        game.run(level);
 
 
     }
