@@ -41,7 +41,6 @@ public class Level1Controller extends LevelController implements Initializable, 
     private Button submit_button;
 
 
-
     public void initialize(URL location, ResourceBundle resources) {
 
 
@@ -61,6 +60,7 @@ public class Level1Controller extends LevelController implements Initializable, 
 
     /**
      * Processes input from the console and performs action on objects
+     *
      * @param event
      */
     @FXML
@@ -80,7 +80,6 @@ public class Level1Controller extends LevelController implements Initializable, 
      * Initial level setup.
      * Gets interactableObject instances and associates them with a view in representatioMap
      * Starts Keys Event Handler todo: this should be its own method
-     *
      */
     public void loadLevel() {
 
@@ -104,7 +103,7 @@ public class Level1Controller extends LevelController implements Initializable, 
             view.setVisible(true);
         }
         handleInput();
-        game.getPlayer().getAnimation().start();
+        game.getPlayer().getAnimationTimer().start();
 
     }
 
@@ -119,15 +118,15 @@ public class Level1Controller extends LevelController implements Initializable, 
                     case RIGHT:
                         player.setVelocity(100);
                         player.getPlayerView().setScaleX(1);
-                        player.getAnimation().start();
-                        player.getPlayerAnim().play();
+                        player.getAnimationTimer().start();
+                        player.getPlayerAnimation().play();
                         player.playSound();
                         break;
                     case LEFT:
                         player.setVelocity(-100);
                         player.getPlayerView().setScaleX(-1);
-                        player.getAnimation().start();
-                        player.getPlayerAnim().play();
+                        player.getAnimationTimer().start();
+                        player.getPlayerAnimation().play();
                         player.playSound();
                         break;
                     case ENTER:
@@ -148,7 +147,7 @@ public class Level1Controller extends LevelController implements Initializable, 
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
                 player.setVelocity(0);
-                player.getPlayerAnim().stop();
+                player.getPlayerAnimation().stop();
             }
         })
         ;
@@ -156,24 +155,30 @@ public class Level1Controller extends LevelController implements Initializable, 
 
     /**
      * Moves representations according to invoked methods
+     *
      * @param collection
      */
     private void moveInteractableObject(Collection<InteractableObject> collection) {
         for (InteractableObject object : collection) {
-            if (representationMap.containsKey(object)) {
+            if (!(object instanceof Door) && representationMap.containsKey(object)) {
                 representationMap.get(object).setX(object.getX());
                 representationMap.get(object).setY(object.getY());
                 continue;
             }
 
-          /*  if (object instanceof Key && representationMap.containsKey(object)) {
-                representationMap.get(object).setY(550);
-                break;
+            if (object instanceof Door && representationMap.containsKey(object)) {
+                 Door door = (Door)object;
+                 representationMap.get(object).setX(object.getX());
+                 representationMap.get(object).setY(object.getY());
+                 pane.getChildren().add(door.getDoorView());
+                 door.getDoorView().setScaleX(1);
+                 door.setVelocity(50);
+                 door.getAnimationTimer().start();
+                 door.getDoorAnimation().play();
+                 break;
             }
 
-            if (object instanceof Door && representationMap.containsKey(object)) {
-                representationMap.get(object.getFileName());
-            }*/
+          
         }
 
     }

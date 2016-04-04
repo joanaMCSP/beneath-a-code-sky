@@ -35,10 +35,10 @@ public class Player {
     //Animation stuff
     final DoubleProperty velocity = new SimpleDoubleProperty();
     final LongProperty lastUpdateTime = new SimpleLongProperty();
-    private Animation playerAnim;
+    private Animation playerAnimation;
     private ImageView playerView;
     private AudioClip plonkSound;
-    private final AnimationTimer animation = new AnimationTimer() {
+    private final AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long timestamp) {
             if (lastUpdateTime.get() > 0) {
@@ -60,26 +60,21 @@ public class Player {
 
     }
 
-    public Animation getPlayerAnim() {
-        return playerAnim;
+    public Animation getPlayerAnimation() {
+        return playerAnimation;
     }
 
     public ImageView getPlayerView() {
         return playerView;
     }
 
-    public AnimationTimer getAnimation() {
-        return animation;
-    }
-
-    public double getVelocity() {
-        return velocity.get();
+    public AnimationTimer getAnimationTimer() {
+        return animationTimer;
     }
 
     public void setVelocity(double velocity) {
         this.velocity.set(velocity);
     }
-
 
     public void load() {
         float px = x;
@@ -96,21 +91,18 @@ public class Player {
         }
 
         playerView = new ImageView(fileName);
-        System.out.println(playerView);
         playerView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
         playerView.setY(px);
         playerView.setY(py);
 
-        //pane.getChildren().add(playerView);
-
-        playerAnim = new SpriteAnimation(
+        playerAnimation = new SpriteAnimation(
                 playerView,
                 Duration.millis(1000),
                 COUNT, COLUMNS,
                 OFFSET_X, OFFSET_Y,
                 WIDTH, HEIGHT
         );
-        playerAnim.setCycleCount(Animation.INDEFINITE);
+        playerAnimation.setCycleCount(Animation.INDEFINITE);
     }
 
     public void playSound() {
@@ -119,8 +111,4 @@ public class Player {
         }
         plonkSound.play();
     }
-
-
-
-
 }
