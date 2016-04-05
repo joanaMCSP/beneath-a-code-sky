@@ -13,7 +13,11 @@ public class Key extends InteractableObject {
 
     public void drop() {
         System.out.println("key being dropped");
-        setY(getY() + 200);
+        setY(getY() + 400);
+    }
+    public void get(){
+        setX(getX()+3000);
+        setY(getY()+3000);
     }
 
     public void use(){

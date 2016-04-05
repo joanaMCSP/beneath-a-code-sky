@@ -44,7 +44,7 @@ public class Door extends InteractableObject {
                 final double deltaX = elapsedSeconds * velocity.get();
                 final double oldX = doorView.getTranslateX();
                 final double newX = Math.max(0, Math.min(1200, oldX + deltaX));
-               doorView.setTranslateX(newX);
+                doorView.setTranslateX(newX);
             }
             lastUpdateTime.set(timestamp);
         }
@@ -56,8 +56,6 @@ public class Door extends InteractableObject {
         float px = getX();
         float py = getY();
 
-
-
     }
 
 
@@ -66,11 +64,11 @@ public class Door extends InteractableObject {
         System.out.println("opening");
 
         doorAnimation.play();
+        animationTimer.start();
         doorView = new ImageView("interactables/opendoor.png");
         doorView.setX(getX());
         doorView.setY(getY());
     }
-
 
     public ImageView getDoorView() {
         return doorView;
@@ -91,6 +89,7 @@ public class Door extends InteractableObject {
                 WIDTH, HEIGHT
         );
         doorAnimation.setCycleCount(1);
+
 
     }
     public void setDoorView(ImageView doorView) {

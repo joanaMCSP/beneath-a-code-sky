@@ -170,23 +170,22 @@ public class Level1Controller extends LevelController implements Initializable, 
      * @param collection
      */
     private void moveInteractableObject(Collection<InteractableObject> collection) {
+        boolean doorOpen = false;
         for (InteractableObject object : collection) {
-            if (!(object instanceof Door) && representationMap.containsKey(object)) {
+            if (representationMap.containsKey(object)) {
+                if (object instanceof Door && !doorOpen) {
+                    System.out.println("entra aquiiiii");
+                    Door door = (Door) object;
+                    ImageView imageView = new ImageView("interactables/opendoor.png");
+                    imageView.setX(door.getX());
+                    imageView.setY(door.getY());
+                    pane.getChildren().add(imageView);
+                    doorOpen = true;
+                }
                 representationMap.get(object).setX(object.getX());
                 representationMap.get(object).setY(object.getY());
                 continue;
             }
-
-            if (object instanceof Door && representationMap.containsKey(object)) {
-                Door door = (Door) object;
-
-                 ImageView view = door.getDoorView();
-
-                 pane.getChildren().add(view) ;
-
-
-            }
-
 
         }
 

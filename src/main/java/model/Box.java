@@ -12,7 +12,7 @@ public class Box extends InteractableObject {
 
     public void push() {
         System.out.println("this box is being very pushed by 100px");
-        setX(getX() + 100);
+        setX(getX() + 150);
     }
 
     public void pull() {

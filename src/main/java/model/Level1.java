@@ -15,7 +15,7 @@ public class Level1 extends Level {
         levelObjects = new HashMap<String, int[]>();
         levelObjects.put("door", new int[]{700,400});
         levelObjects.put("box", new int[]{500,400});
-        levelObjects.put("key", new int[]{900, 400});
+        levelObjects.put("key", new int[]{900, 100});
     }
 
     public Level1() {
