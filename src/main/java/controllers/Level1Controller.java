@@ -40,6 +40,9 @@ public class Level1Controller extends LevelController implements Initializable, 
     @FXML
     private Button submit_button;
 
+    @FXML
+    private Button exitButton;
+
 
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -85,6 +88,8 @@ public class Level1Controller extends LevelController implements Initializable, 
      */
     public void loadLevel() {
 
+        exitButton.setVisible(false);
+
         game.getPlayer().load();
         representationMap = new HashMap<InteractableObject, ImageView>();
 
@@ -116,7 +121,7 @@ public class Level1Controller extends LevelController implements Initializable, 
                 imageView.setY(door.getY());
                 pane.getChildren().add(imageView);
             }
-            if(object instanceof Box){
+            if (object instanceof Box) {
                 bringImageToFront(object);
             }
         }
@@ -182,8 +187,10 @@ public class Level1Controller extends LevelController implements Initializable, 
      * @param collection
      */
     private void moveInteractableObject(Collection<InteractableObject> collection) {
-        boolean doorOpen = false;
         for (InteractableObject object : collection) {
+            if (object instanceof Door && ((Door) object).isOpen()) {
+                exitButton.setVisible(true);
+            }
             if (representationMap.containsKey(object)) {
                 representationMap.get(object).setX(object.getX());
                 representationMap.get(object).setY(object.getY());
@@ -193,6 +200,29 @@ public class Level1Controller extends LevelController implements Initializable, 
         }
 
     }
+
+    @FXML
+    void onExitButtonClicked(ActionEvent event) {
+        // get level1 from Game
+        //Level level = game.getLevels().get(1);
+        // criar o level 1 no view
+        //level.init();
+
+        Navigation.getInstance().loadScreen("nextLevel");
+
+        // settar o controller no level1
+        //Level1Controller level1Controller = (Level1Controller) Navigation.getInstance().getInitializable("level1");
+        //level.setController(level1Controller);
+
+        // settar o level e o Game no controller
+        //level1Controller.setGame(game);
+        //level1Controller.setLevel((Level1)level);
+
+
+
+    }
+
+
 
 
 }

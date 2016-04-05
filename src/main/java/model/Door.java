@@ -25,6 +25,8 @@ public class Door extends InteractableObject {
     public static final int OFFSET_Y = 0;
     public static final int WIDTH = 201;
     public static final int HEIGHT = 190;
+    private boolean open;
+    private boolean passed;
 
     private Key key;
 
@@ -58,6 +60,13 @@ public class Door extends InteractableObject {
 
     }
 
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
 
     public void open() {
 
@@ -68,6 +77,7 @@ public class Door extends InteractableObject {
         doorView = new ImageView("interactables/opendoor.png");
         doorView.setX(getX());
         doorView.setY(getY());
+        open = true;
     }
 
     public ImageView getDoorView() {
@@ -90,8 +100,9 @@ public class Door extends InteractableObject {
         );
         doorAnimation.setCycleCount(1);
 
-
     }
+
+
     public void setDoorView(ImageView doorView) {
         this.doorView = doorView;
     }
