@@ -114,7 +114,7 @@ public abstract class Level {
      * @throws InvocationTargetException if user input does not match a declared method
      * @throws IllegalAccessException
      */
-    public void execute(String code) throws InvocationTargetException, IllegalAccessException {
+    public void execute(String code) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         List<String[]> commands = Parser.parse(code);
 
         for (String[] command : commands) {
@@ -123,13 +123,8 @@ public abstract class Level {
             String method = command[1];
 
             if (objectExists(object)) {
-
-                try {
                     Method instruction = interactableObjects.get(object).getClass().getDeclaredMethod(method);
                     instruction.invoke(interactableObjects.get(object));
-                } catch (NoSuchMethodException e) {
-                    System.out.println("There is no method with this name");
-                }
 
             }
         }

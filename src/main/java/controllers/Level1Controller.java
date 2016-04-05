@@ -13,6 +13,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import model.*;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -68,17 +70,36 @@ public class Level1Controller extends LevelController implements Initializable, 
      */
     @FXML
     void onSubmitButtonClicked(ActionEvent event) {
-        try {
-            //execute method
-            level.execute(console.getText());
-            //move image correspondingly
-            moveInteractableObject(level.getInteractableObjects());
+
+        if(submit_button.getText().equals("Clear")){
             console.clear();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            submit_button.setText("Submit");
+            return;
         }
+        StringWriter stackTraceWriter = new StringWriter();
+        try {
+            level.execute(console.getText());
+        } catch (InvocationTargetException e) {
+            printStackTrace(stackTraceWriter, e);
+            return;
+        } catch (IllegalAccessException e) {
+            printStackTrace(stackTraceWriter, e);
+            return;
+        } catch (NoSuchMethodException e) {
+            printStackTrace(stackTraceWriter, e);
+            return;
+        }
+        //move image correspondingly
+
+        moveInteractableObject(level.getInteractableObjects());
+        console.clear();
+
+    }
+
+    private void printStackTrace(StringWriter stackTraceWriter, Exception e) {
+        e.printStackTrace(new PrintWriter(stackTraceWriter));
+        console.appendText("\n" + stackTraceWriter.toString());
+        submit_button.setText("Clear");
     }
 
     /**
@@ -87,6 +108,7 @@ public class Level1Controller extends LevelController implements Initializable, 
      * Starts Keys Event Handler todo: this should be its own method
      */
     public void loadLevel() {
+
 
         exitButton.setVisible(false);
 
@@ -169,7 +191,6 @@ public class Level1Controller extends LevelController implements Initializable, 
                         submit_button.setVisible(false);
                         break;
                 }
-
             }
         });
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -219,10 +240,7 @@ public class Level1Controller extends LevelController implements Initializable, 
         //level1Controller.setLevel((Level1)level);
 
 
-
     }
-
-
 
 
 }
