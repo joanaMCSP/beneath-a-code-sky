@@ -66,7 +66,9 @@ public class Level1Controller extends LevelController implements Initializable, 
     @FXML
     void onSubmitButtonClicked(ActionEvent event) {
         try {
+            //execute method
             level.execute(console.getText());
+            //move image correspondingly
             moveInteractableObject(level.getInteractableObjects());
             console.clear();
         } catch (InvocationTargetException e) {
@@ -86,6 +88,7 @@ public class Level1Controller extends LevelController implements Initializable, 
         game.getPlayer().load();
         representationMap = new HashMap<InteractableObject, ImageView>();
 
+
         Collection<InteractableObject> levelInteractableObjects = level.getInteractableObjects();
 
         for (InteractableObject obj : levelInteractableObjects) {
@@ -101,6 +104,14 @@ public class Level1Controller extends LevelController implements Initializable, 
             pane.getChildren().add(view);
             views.add(view);
             view.setVisible(true);
+        }
+        //load level door
+        for (InteractableObject object : representationMap.keySet()) {
+            if (object instanceof Door) {
+                Door door = (Door) object;
+                door.setDoorView(representationMap.get(door));
+                door.load();
+            }
         }
         handleInput();
         game.getPlayer().getAnimationTimer().start();
@@ -167,20 +178,19 @@ public class Level1Controller extends LevelController implements Initializable, 
             }
 
             if (object instanceof Door && representationMap.containsKey(object)) {
-                 Door door = (Door)object;
-                 representationMap.get(object).setX(object.getX());
-                 representationMap.get(object).setY(object.getY());
-                 pane.getChildren().add(door.getDoorView());
-                 door.getDoorView().setScaleX(1);
-                 door.setVelocity(50);
-                 door.getAnimationTimer().start();
-                 door.getDoorAnimation().play();
-                 break;
+                Door door = (Door) object;
+
+                 ImageView view = door.getDoorView();
+
+                 pane.getChildren().add(view) ;
+
+
             }
 
-          
+
         }
 
     }
+
 
 }
