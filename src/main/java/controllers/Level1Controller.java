@@ -111,11 +111,23 @@ public class Level1Controller extends LevelController implements Initializable, 
                 Door door = (Door) object;
                 door.setDoorView(representationMap.get(door));
                 door.load();
+                ImageView imageView = new ImageView("interactables/opendoor.png");
+                imageView.setX(door.getX());
+                imageView.setY(door.getY());
+                pane.getChildren().add(imageView);
+            }
+            if(object instanceof Box){
+                bringImageToFront(object);
             }
         }
         handleInput();
         game.getPlayer().getAnimationTimer().start();
 
+    }
+
+    private void bringImageToFront(InteractableObject object) {
+        pane.getChildren().remove(representationMap.get(object));
+        pane.getChildren().add(representationMap.get(object));
     }
 
     private void handleInput() {
@@ -173,15 +185,6 @@ public class Level1Controller extends LevelController implements Initializable, 
         boolean doorOpen = false;
         for (InteractableObject object : collection) {
             if (representationMap.containsKey(object)) {
-                if (object instanceof Door && !doorOpen) {
-                    System.out.println("entra aquiiiii");
-                    Door door = (Door) object;
-                    ImageView imageView = new ImageView("interactables/opendoor.png");
-                    imageView.setX(door.getX());
-                    imageView.setY(door.getY());
-                    pane.getChildren().add(imageView);
-                    doorOpen = true;
-                }
                 representationMap.get(object).setX(object.getX());
                 representationMap.get(object).setY(object.getY());
                 continue;
