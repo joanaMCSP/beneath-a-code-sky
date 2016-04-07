@@ -33,7 +33,7 @@ User controls a character with Keyboard:
  
 The player moves like most 2D platform games. The character can move right, left, jump and crouch as well and interact with objects both physically and through basic syntax commands.
 
-The character has a mobile device with a terminal console that interacts and manipulates objects to complete the necessary tasks for each level. To do so, the user must submit pseudo-code based in simple languages like Ruby _(i.e. to push a box, the user must call the object "box", and the action "push" which is a declared method that pushes the box - "box.push")_.
+The character has a mobile device with a terminal console that interacts and manipulates objects to complete the necessary tasks for each level. To do so, the user must submit pseudo-code based in high-level programming languages like Ruby _(i.e. to push a box, the user must call the object "box", and the action "push" which is a declared method that pushes the box - "box.push")_.
 
 Level difficulty increases with more complex enigmas to solve , taking into consideration a pedagogic approach over the  programming learning process.
 
