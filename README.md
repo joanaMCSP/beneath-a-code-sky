@@ -60,3 +60,5 @@ Design
  * Model structure by [Jairson Souza](https://github.com/JSouza67), [Joana Peixoto](https://github.com/joanaMCSP), [Paulo Pereira](https://github.com/cucuzinas);
  * Parser-input processing and translation through Reflection API by [Filipe Jorge](https://github.com/filipemoraisjorge), [Joana Peixoto](https://github.com/joanaMCSP), [Pedro Antoninho](https://github.com/pantoninho), [Sérgio Gouveia](https://github.com/sgouveia);
  * Presentation by all team members.
+ * 
+ 
